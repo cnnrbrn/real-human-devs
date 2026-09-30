@@ -1,0 +1,25 @@
+---
+import Layout from '../layouts/Layout.astro'
+import { SiteNav } from '../components/site-nav'
+import { Hero } from '../components/hero'
+import { Services } from '../components/services'
+import { Process } from '../components/process'
+import { Work } from '../components/work'
+import { ContactCta } from '../components/contact-cta'
+import { SiteFooter } from '../components/site-footer'
+---
+
+<Layout>
+  <div class="min-h-screen bg-background text-foreground">
+    <!-- island: mobile menu toggle + scrollspy, above the fold -->
+    <SiteNav client:load />
+    <main>
+      <Hero />
+      <Services />
+  
+      <!-- island: form state, below the fold -->
+      <ContactCta client:visible />
+    </main>
+    <SiteFooter />
+  </div>
+</Layout>

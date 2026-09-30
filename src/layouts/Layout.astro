@@ -1,0 +1,65 @@
+---
+import '@fontsource-variable/caveat'
+import '@fontsource-variable/roboto'
+import '@fontsource/kalam/300.css'
+import '@fontsource/kalam/400.css'
+import '@fontsource/kalam/700.css'
+import '../styles/globals.css'
+
+const title = 'Real Human Devs — Web, App & WordPress Engineering'
+const description =
+  'A studio of real human engineers building web & mobile apps and custom WordPress themes and plugins — secure, tested, and ready to scale.'
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <meta name="color-scheme" content="light dark" />
+    <meta name="theme-color" content="#f4ecd8" />
+
+    {/* Runs before first paint so the page never flashes the wrong theme.
+        is:inline keeps Astro from bundling/deferring it. Mirrors applyTheme()
+        in components/theme-toggle.tsx — keep the two in step. */}
+    <script is:inline>
+      (function () {
+        try {
+          var stored = localStorage.getItem('theme')
+          var dark = stored
+            ? stored === 'dark'
+            : window.matchMedia('(prefers-color-scheme: dark)').matches
+          document.documentElement.classList.toggle('dark', dark)
+          document.documentElement.style.colorScheme = dark ? 'dark' : 'light'
+          if (dark) {
+            document
+              .querySelector('meta[name="theme-color"]')
+              .setAttribute('content', '#16181d')
+          }
+        } catch (e) {
+          /* storage blocked — fall back to the light default */
+        }
+      })()
+    </script>
+
+    <link
+      rel="icon"
+      href="/favicon-light.svg"
+      type="image/svg+xml"
+      media="(prefers-color-scheme: light)"
+    />
+    <link
+      rel="icon"
+      href="/favicon-dark.svg"
+      type="image/svg+xml"
+      media="(prefers-color-scheme: dark)"
+    />
+    <link rel="icon" href="/favicon-32x32.png" sizes="32x32" />
+    <link rel="apple-touch-icon" href="/apple-icon.png" />
+  </head>
+  <body class="bg-background font-sans antialiased">
+    <slot />
+  </body>
+</html>
