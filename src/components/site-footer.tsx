@@ -4,59 +4,56 @@ const columns = [
   {
     heading: "Services",
     links: [
-      { label: "Web development", href: "#services" },
-      { label: "App development", href: "#services" },
-      { label: "Custom WordPress", href: "#services" },
+      { label: "Web development", href: "/#services" },
+      { label: "App development", href: "/#services" },
+      { label: "Custom WordPress", href: "/#services" },
     ],
   },
   {
     heading: "Studio",
     links: [
-      { label: "Process", href: "#process" },
-      { label: "Work", href: "#work" },
-      { label: "Contact", href: "#contact" },
+      { label: "Work", href: "/#work" },
+      { label: "Contact", href: "/#contact" },
+      {
+        label: "hello@realhumandevs.com",
+        href: "mailto:hello@realhumandevs.com",
+      },
     ],
   },
 ];
 
 export function SiteFooter() {
   return (
-    <footer className="border-t border-border">
-      <div className="mx-auto max-w-6xl px-5 py-12 md:px-8">
-        <div className="grid gap-10 md:grid-cols-[1.5fr_1fr_1fr]">
-          <div>
-            <a href="#top" className="flex items-center gap-2.5">
-              <Logo className="text-2xl leading-none" />
-            </a>
+    <footer className="border-t-[1.5px] border-line">
+      <div className="container-page grid grid-cols-[repeat(auto-fit,minmax(200px,1fr))] gap-10 pt-14 pb-10">
+        <div>
+          <a href="/" className="inline-flex">
+            <Logo height="52px" />
+          </a>
+        </div>
+
+        {columns.map((col) => (
+          <div key={col.heading} className="flex flex-col gap-3">
+            <h3 className="label">{col.heading}</h3>
+            <ul className="flex flex-col gap-3 text-[17px]">
+              {col.links.map((link) => (
+                <li key={link.label}>
+                  <a
+                    href={link.href}
+                    className="transition-colors hover:text-orange-text"
+                  >
+                    {link.label}
+                  </a>
+                </li>
+              ))}
+            </ul>
           </div>
-
-          {columns.map((col) => (
-            <div key={col.heading}>
-              <h3 className="font-hand text-xs uppercase tracking-wider text-muted-foreground">
-                {col.heading}
-              </h3>
-              <ul className="mt-4 space-y-2.5">
-                {col.links.map((link) => (
-                  <li key={link.label}>
-                    <a
-                      href={link.href}
-                      className="text-sm text-foreground/80 transition-colors hover:text-primary"
-                    >
-                      {link.label}
-                    </a>
-                  </li>
-                ))}
-              </ul>
-            </div>
-          ))}
-        </div>
-
-        <div className="mt-12 flex flex-col gap-3 border-t border-border pt-6 text-center">
-          <p className="font-mono text-xs text-muted-foreground">
-            © {new Date().getFullYear()} Real Human Devs. Written by humans.
-          </p>
-        </div>
+        ))}
       </div>
+
+      <p className="container-page border-t-[1.5px] border-dashed border-rule pt-5 pb-8 text-center font-hand text-[16px] text-muted">
+        © {new Date().getFullYear()} Real Human Devs
+      </p>
     </footer>
   );
 }

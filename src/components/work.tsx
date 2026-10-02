@@ -1,81 +1,101 @@
-const projects = [
-  {
-    client: "Northwind Health",
-    type: "Web app",
-    result: "Patient portal rebuilt — 2.1s → 0.4s load, HIPAA-ready.",
-  },
-  {
-    client: "Tallgrass Coffee",
-    type: "WordPress",
-    result: "Custom headless theme + subscription plugin. +38% online orders.",
-  },
-  {
-    client: "Fieldbook",
-    type: "Mobile app",
-    result: "Offline-first field app for 4,000+ daily technicians.",
-  },
-]
+import {
+  BrowserFrame,
+  ThemedScreenshot,
+  type Screenshot,
+} from "./browser-frame";
+import { UnevenButton } from "./uneven-button";
+import {
+  caseStudyPath,
+  facts,
+  pullLine,
+  siteUrl,
+} from "../data/real-spanish-stories";
 
-const quote = {
-  text: "We came to Real Human Devs with a half-working app. They didn't judge it — they hardened it, tested it, and got us to launch. It's now handling thousands of paying users.",
-  name: "Priya Nadella",
-  role: "Founder, Ledgerlite",
-}
-
-export function Work() {
+export function Work({
+  screenshot,
+  darkScreenshot,
+}: {
+  screenshot: Screenshot;
+  darkScreenshot: Screenshot;
+}) {
   return (
-    <section id="work" className="border-t border-border bg-card/30">
-      <div className="mx-auto max-w-6xl px-5 py-20 md:px-8 md:py-28">
-        <p className="font-mono text-sm text-primary">// Selected work</p>
-        <h2 className="mt-3 max-w-2xl text-balance font-hand text-3xl font-semibold tracking-tight md:text-5xl">
-          Products people actually rely on.
-        </h2>
+    <section id="work" className="border-b-[1.5px] border-line">
+      <div className="container-page py-26">
+        <div className="mb-12 flex flex-wrap items-end justify-between gap-8">
+          <div>
+            <p className="kicker">Featured project</p>
+            <h2 className="h2">Real Spanish Stories.</h2>
+          </div>
+          <div className="flex flex-wrap items-center gap-5">
+            <UnevenButton
+              href={caseStudyPath}
+              size="sm"
+              rotate={-1}
+              radius="5px 12px 6px 14px / 14px 6px 12px 5px"
+              className="px-5.5 pt-2.5 pb-2 text-[20px]"
+            >
+              Read the case study <span aria-hidden="true">→</span>
+            </UnevenButton>
+            <UnevenButton
+              href={siteUrl}
+              target="_blank"
+              rel="noopener"
+              variant="secondary"
+              rotate={1}
+              radius="12px 5px 14px 6px / 6px 14px 5px 12px"
+              className="px-5.5 pt-2.5 pb-2 text-[20px] [--btn-sx:4px] [--btn-sy:5px]"
+            >
+              Visit the site <span aria-hidden="true">↗</span>
+            </UnevenButton>
+          </div>
+        </div>
 
-        <div className="mt-14 grid gap-12 lg:grid-cols-[1.1fr_0.9fr]">
-          <ul className="divide-y divide-border border-y border-border">
-            {projects.map((project) => (
-              <li
-                key={project.client}
-                className="group flex flex-col gap-1 py-5 transition-colors hover:bg-secondary/40 md:flex-row md:items-center md:justify-between md:gap-6"
-              >
-                <div className="flex items-baseline gap-4">
-                  <span className="text-lg font-semibold tracking-tight text-foreground">
-                    {project.client}
-                  </span>
-                  <span className="rounded-full border border-border px-2.5 py-0.5 font-mono text-xs text-muted-foreground">
-                    {project.type}
-                  </span>
+        <div className="flex flex-wrap overflow-hidden rounded-[10px] border-[1.5px] border-line bg-card">
+          {/* negative margins collapse these borders into the panel's own
+              edge when the cells wrap onto separate rows */}
+          <div className="-mr-[1.5px] -mb-[1.5px] min-w-0 flex-[2_1_520px] border-r-[1.5px] border-b-[1.5px] border-line sm:bg-paper-deep sm:p-4">
+            {/* on phones the frame sits flush, so the panel's edge is its border */}
+            <BrowserFrame
+              url="realspanishstories.com"
+              className="sm:rounded-lg sm:border-[1.5px] sm:border-line"
+            >
+              <ThemedScreenshot
+                light={screenshot}
+                dark={darkScreenshot}
+                alt="A story page on Real Spanish Stories: the Cerro Rico story, with a level picker beside it"
+                sizes="(min-width: 1280px) 790px, calc(100vw - 70px)"
+                className="block aspect-16/10 w-full object-cover object-top"
+              />
+            </BrowserFrame>
+          </div>
+
+          <div className="flex min-w-0 flex-[1_1_320px] flex-col gap-7 px-5 pt-6 pb-7 sm:px-9 sm:pt-9 sm:pb-10">
+            <p className="text-[19px] leading-[1.55] text-pretty">
+              Short stories written for Spanish learners, read level by level.
+              We designed and built the whole thing — reading experience,
+              content system and the site around it.
+            </p>
+
+            <dl>
+              {facts.map((fact) => (
+                <div
+                  key={fact.label}
+                  className="grid grid-cols-[110px_1fr] gap-4 border-t-[1.5px] border-dashed border-rule py-3.5"
+                >
+                  <dt className="font-hand text-[17px] text-muted">
+                    {fact.label}
+                  </dt>
+                  <dd className="text-[17px]">{fact.value}</dd>
                 </div>
-                <p className="text-pretty text-sm leading-relaxed text-muted-foreground md:max-w-sm md:text-right">
-                  {project.result}
-                </p>
-              </li>
-            ))}
-          </ul>
+              ))}
+            </dl>
 
-          <figure className="flex flex-col justify-center rounded-xl border border-border bg-background p-8">
-            <blockquote className="text-pretty text-lg leading-relaxed text-foreground">
-              &ldquo;{quote.text}&rdquo;
-            </blockquote>
-            <figcaption className="mt-6 flex items-center gap-3">
-              <div className="flex h-10 w-10 items-center justify-center rounded-full bg-primary/15 font-mono text-sm font-medium text-primary">
-                {quote.name
-                  .split(" ")
-                  .map((n) => n[0])
-                  .join("")}
-              </div>
-              <div>
-                <p className="text-sm font-medium text-foreground">
-                  {quote.name}
-                </p>
-                <p className="font-mono text-xs text-muted-foreground">
-                  {quote.role}
-                </p>
-              </div>
-            </figcaption>
-          </figure>
+            <p className="mt-auto rotate-[-1deg] font-hand text-[21px] leading-[1.35]">
+              &ldquo;{pullLine}&rdquo;
+            </p>
+          </div>
         </div>
       </div>
     </section>
-  )
+  );
 }

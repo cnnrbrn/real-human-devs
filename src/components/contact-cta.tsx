@@ -1,77 +1,70 @@
 "use client";
 
 import { useState } from "react";
-import { ArrowUpRight, Check } from "lucide-react";
+import { UnevenButton } from "./uneven-button";
 
-const projectTypes = ["Web app", "Mobile app", "WordPress"];
+const projectTypes = ["Web app", "Mobile app", "WordPress", "Not sure yet"];
 
 export function ContactCta() {
   const [selected, setSelected] = useState("Web app");
-  const [submitted, setSubmitted] = useState(false);
+  const [sentTo, setSentTo] = useState<string | null>(null);
 
-  function handleSubmit(e: React.FormEvent) {
+  function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
-    setSubmitted(true);
+    const name = String(new FormData(e.currentTarget).get("name") ?? "");
+    setSentTo(name.trim().split(/\s+/)[0] || "friend");
   }
 
   return (
-    <section id="contact" className="border-t border-border">
-      <div className="mx-auto max-w-6xl px-5 py-20 md:px-8 md:py-28">
-        <div className="grid gap-12 lg:grid-cols-2">
+    <section id="contact">
+      <div className="container-page grid grid-cols-[repeat(auto-fit,minmax(min(100%,420px),1fr))] items-start gap-16 py-26">
+        <div className="flex flex-col gap-6">
           <div>
-            <p className="font-mono text-sm text-primary">// Start a project</p>
-            <h2 className="mt-3 text-balance font-hand text-4xl font-semibold tracking-tight md:text-5xl">
-              Tell us what you&apos;re building.
-            </h2>
-            <p className="mt-5 max-w-md text-pretty leading-relaxed text-muted-foreground">
-              Real humans read every message. We&apos;ll reply within one
-              business day with honest thoughts and next steps — no sales
-              scripts.
-            </p>
-            <p className="mt-8 font-mono text-lg text-muted-foreground">
-              Prefer email?{" "}
-              <a
-                href="mailto:hello@realhumandevs.com"
-                className="text-foreground underline underline-offset-4 hover:text-primary"
-              >
-                hello@realhumandevs.com
-              </a>
-            </p>
+            <p className="kicker">Start a project</p>
+            <h2 className="h2">Tell us what you&apos;re building.</h2>
           </div>
+          <p className="max-w-[40ch] text-[19px] leading-[1.6] text-muted">
+            Real humans read every message and we&apos;ll reply within one
+            business day.
+          </p>
+          <p className="font-hand text-[21px] text-muted">
+            Prefer email?{" "}
+            <a
+              href="mailto:hello@realhumandevs.com"
+              className="text-ink underline underline-offset-[5px]"
+            >
+              hello@realhumandevs.com
+            </a>
+          </p>
+        </div>
 
-          {submitted ? (
-            <div className="flex flex-col items-start justify-center rounded-xl border border-border bg-card p-8">
-              <div className="flex h-11 w-11 items-center justify-center rounded-full bg-primary/15 text-primary">
-                <Check className="h-5 w-5" />
-              </div>
-              <h3 className="mt-4 font-hand text-xl font-semibold tracking-tight">
-                Message sent
+        <div className="flex flex-col gap-6 rounded-xl border-[1.5px] border-line bg-card p-5 sm:p-10">
+          {sentTo !== null ? (
+            <div role="status" className="flex flex-col gap-3 py-6">
+              <h3 className="font-hand text-[40px] leading-[1.05] font-bold">
+                Got it — thanks, {sentTo}.
               </h3>
-              <p className="mt-2 text-pretty leading-relaxed text-muted-foreground">
-                Thanks for reaching out. A real human will get back to you
-                within one business day.
+              <p className="text-[18px] leading-[1.55] text-muted">
+                One of us will read this properly and write back within a
+                business day.
               </p>
             </div>
           ) : (
-            <form
-              onSubmit={handleSubmit}
-              className="rounded-xl border border-border bg-card p-6 md:p-8"
-            >
-              <fieldset className="mb-6">
-                <legend className="mb-3 font-mono text-xs uppercase tracking-wider text-muted-foreground">
-                  Project type
-                </legend>
-                <div className="flex flex-wrap gap-2">
+            <form onSubmit={handleSubmit} className="flex flex-col gap-6">
+              <fieldset className="flex flex-col gap-3">
+                <legend className="label mb-3">Project type</legend>
+                <input type="hidden" name="projectType" value={selected} />
+                <div className="flex flex-wrap gap-2.5">
                   {projectTypes.map((type) => (
                     <button
                       key={type}
                       type="button"
                       onClick={() => setSelected(type)}
                       aria-pressed={selected === type}
-                      className={`rounded-md border px-3 py-1.5 font-mono text-sm transition-colors ${
+                      className={`cursor-pointer rounded-md border-[1.5px] border-line px-4 pt-1.75 pb-1.25 font-hand text-[18px] transition-colors ${
                         selected === type
-                          ? "border-primary bg-primary text-primary-foreground"
-                          : "border-border bg-background text-muted-foreground hover:text-foreground"
+                          ? "bg-orange text-on-orange"
+                          : "bg-card text-ink hover:bg-peach"
                       }`}
                     >
                       {type}
@@ -80,53 +73,50 @@ export function ContactCta() {
                 </div>
               </fieldset>
 
-              <div className="grid gap-4 sm:grid-cols-2">
-                <label className="flex flex-col gap-1.5">
-                  <span className="font-mono text-xs uppercase tracking-wider text-muted-foreground">
-                    Name
-                  </span>
+              <div className="grid grid-cols-[repeat(auto-fit,minmax(180px,1fr))] gap-5">
+                <label className="flex flex-col gap-2.5">
+                  <span className="label">Name</span>
                   <input
                     required
                     type="text"
                     name="name"
                     autoComplete="name"
-                    className="rounded-md border border-border bg-background px-3 py-2.5 text-sm text-foreground outline-none transition-colors focus:border-primary"
+                    className="field h-12.5"
                   />
                 </label>
-                <label className="flex flex-col gap-1.5">
-                  <span className="font-mono text-xs uppercase tracking-wider text-muted-foreground">
-                    Email
-                  </span>
+                <label className="flex flex-col gap-2.5">
+                  <span className="label">Email</span>
                   <input
                     required
                     type="email"
                     name="email"
                     autoComplete="email"
-                    className="rounded-md border border-border bg-background px-3 py-2.5 text-sm text-foreground outline-none transition-colors focus:border-primary"
+                    className="field h-12.5"
                   />
                 </label>
               </div>
 
-              <label className="mt-4 flex flex-col gap-1.5">
-                <span className="font-mono text-xs uppercase tracking-wider text-muted-foreground">
-                  What do you need?
-                </span>
+              <label className="flex flex-col gap-2.5">
+                <span className="label">What do you need?</span>
                 <textarea
                   required
                   name="message"
                   rows={4}
-                  className="resize-none rounded-md border border-border bg-background px-3 py-2.5 text-sm text-foreground outline-none transition-colors focus:border-primary"
+                  className="field resize-y py-3 leading-normal"
                   placeholder="A few sentences about your project or the app you need help with…"
                 />
               </label>
 
-              <button
+              <UnevenButton
                 type="submit"
-                className="group mt-6 inline-flex w-full items-center justify-center gap-2 rounded-md bg-primary px-6 py-3 font-mono text-sm font-medium text-primary-foreground transition-opacity hover:opacity-90"
+                size="lg"
+                rotate={-0.5}
+                radius="8px 14px 6px 12px / 12px 6px 14px 8px"
+                lift={false}
+                className="w-full justify-center p-3.5 text-[21px] [--btn-sx:5px] [--btn-sy:6px] hover:bg-orange-hover"
               >
-                Send message
-                <ArrowUpRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
-              </button>
+                Send message <span aria-hidden="true">↗</span>
+              </UnevenButton>
             </form>
           )}
         </div>

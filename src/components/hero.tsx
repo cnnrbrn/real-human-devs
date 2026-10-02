@@ -1,69 +1,83 @@
-import { ArrowUpRight } from "lucide-react";
+import { ThemedScreenshot, type Screenshot } from "./browser-frame";
+import { UnevenButton } from "./uneven-button";
 
-export function Hero() {
+const alt =
+  "Real Spanish Stories on two phones: the homepage, and the Cerro Rico story with its level buttons";
+
+export function Hero({
+  screenshot,
+  darkScreenshot,
+}: {
+  screenshot: Screenshot;
+  /** The same image in the dark theme, shown when the site is dark. */
+  darkScreenshot: Screenshot;
+}) {
   return (
-    <section id="top" className="relative overflow-hidden">
-      {/* dotted grid backdrop, like graph paper */}
-      <div
-        aria-hidden="true"
-        className="pointer-events-none absolute inset-0 opacity-[0.5]"
-        style={{
-          backgroundImage:
-            "radial-gradient(circle, var(--color-primary) 1px, transparent 1px)",
-          backgroundSize: "24px 24px",
-          maskImage:
-            "radial-gradient(ellipse 80% 60% at 50% 0%, black 40%, transparent 100%)",
-        }}
-      />
+    <section
+      id="top"
+      className="border-b-[1.5px] border-line bg-[radial-gradient(var(--dot)_1px,transparent_1.2px)] bg-size-[26px_26px]"
+    >
+      <div className="@container container-page grid grid-cols-[repeat(auto-fit,minmax(min(100%,460px),1fr))] items-center gap-14 pt-22 pb-26">
+        <div className="flex flex-col items-start gap-7">
+          {/* availability badge — hidden for now, uncomment to bring back
+          <div className="flex rotate-[-1.5deg] items-center gap-2.5 whitespace-nowrap rounded-[14px_6px_12px_5px/5px_12px_6px_14px] border-[1.5px] border-line bg-card px-4.5 py-2 text-[16px]">
+            <span
+              aria-hidden="true"
+              className="size-2.5 rounded-full bg-orange shadow-[0_0_0_4px_var(--peach)]"
+            />
+            Taking new builds — Q4 2026
+          </div> */}
 
-      <div className="relative mx-auto max-w-6xl px-5 pb-20 pt-16 md:px-8 md:pb-28 md:pt-24">
-        <div className="doodle-box-sm inline-flex -rotate-slight items-center gap-2 bg-card px-4 py-1.5">
-          <span className="relative flex h-2.5 w-2.5">
-            <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-primary opacity-70" />
-            <span className="relative inline-flex h-2.5 w-2.5 rounded-full bg-primary" />
-          </span>
-          <span className="text-base text-foreground">
-            Available for new builds — Q3 2026
-          </span>
+          <h1 className="font-hand text-[clamp(52px,7.4vw,92px)] leading-[0.98] font-bold tracking-[-0.01em] text-balance">
+            Tired of talking to AI?{" "}
+            {/* swap to .hl-wavy for the squiggle-underline treatment */}
+            <span className="hl-peach">Talk to us.</span>
+          </h1>
+
+          <p className="max-w-[34ch] text-[21px] leading-[1.55] text-pretty text-muted">
+            A small team of senior designers and developers building web apps,
+            mobile apps and custom WordPress sites. You'll always know who
+            you're talking to.
+          </p>
+
+          <div className="mt-2 flex flex-wrap items-center gap-7">
+            <UnevenButton
+              href="#contact"
+              size="lg"
+              rotate={-0.8}
+              radius="5px 12px 6px 14px / 14px 6px 12px 5px"
+            >
+              Start a project
+            </UnevenButton>
+            {/* hidden until there's more than one project to show — the
+                screenshot already links to the case study
+            <a
+              href="#work"
+              className="font-hand text-[21px] underline decoration-[1.5px] underline-offset-[6px]"
+            >
+              or see what we shipped
+            </a> */}
+          </div>
         </div>
 
-        <h1 className="mt-8 max-w-4xl text-pretty font-display text-6xl font-bold leading-[0.95] tracking-tight md:text-8xl">
-          Tired of talking to AI?
-          <br />
-          <span className="marker">Talk to us.</span>
-        </h1>
-
-        <p className="mt-8 max-w-xl text-pretty text-xl leading-relaxed text-foreground/80">
-          We design and build web apps, mobile apps, and custom WordPress themes
-          &amp; plugins — secure, tested, and ready to scale.
-        </p>
-
-        <div className="mt-9 flex flex-col gap-4 sm:flex-row sm:items-center">
-          <a
-            href="#contact"
-            className="group doodle-box doodle-ink doodle-shadow inline-flex items-center justify-center gap-2 bg-primary px-6 py-3 font-hand text-lg font-bold text-primary-foreground doodle-lift"
-          >
-            Start a project
-            <ArrowUpRight className="h-5 w-5 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
-          </a>
-        </div>
-
-        {/* <dl className="mt-16 grid grid-cols-2 gap-6 border-t-2 border-dashed border-foreground/40 pt-8 md:grid-cols-4">
-          {[
-            { value: "120+", label: "Products shipped" },
-            { value: "9 yrs", label: "Average team experience" },
-            { value: "100%", label: "Human-written, reviewed code" },
-          ].map((stat) => (
-            <div key={stat.label}>
-              <dt className="font-display text-5xl font-bold text-primary">
-                {stat.value}
-              </dt>
-              <dd className="mt-1 text-base leading-relaxed text-foreground/70">
-                {stat.label}
-              </dd>
-            </div>
-          ))}
-        </dl> */}
+        {/* Only beside the headline: once the grid stacks (two 460px
+            columns + the 56px gap no longer fit) it would just repeat the
+            featured project directly below, too small to read. Hidden, its
+            lazy images aren't downloaded. */}
+        <a href="#work" className="hidden @min-[976px]:block">
+          <p className="kicker mb-4.5">
+            Just shipped: Real Spanish Stories <span aria-hidden="true">↓</span>
+          </p>
+          {/* one flat image — frames, tilt and shadows are baked in */}
+          <ThemedScreenshot
+            light={screenshot}
+            dark={darkScreenshot}
+            alt={alt}
+            sizes="580px"
+            fetchPriority="high"
+            className="h-auto w-full"
+          />
+        </a>
       </div>
     </section>
   );
