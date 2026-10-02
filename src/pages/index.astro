@@ -7,7 +7,7 @@ import { Work } from '../components/work'
 import { Services } from '../components/services'
 import { ContactCta } from '../components/contact-cta'
 import { SiteFooter } from '../components/site-footer'
-import rssCerroRico from '../assets/rss-cerro-rico-light.png'
+import rssBayOfPigs from '../assets/rss-bay-of-pigs-light.png'
 import rssCerroRicoDark from '../assets/rss-cerro-rico-beginner-dark.png'
 import heroPhones from '../assets/hero-phones-light.png'
 import heroPhonesDark from '../assets/hero-phones-dark.png'
@@ -31,9 +31,9 @@ async function optimise(
 // page, transparent background), in both themes
 const heroScreenshot = await optimise(heroPhones, [600, 900, 1200, 1800])
 const heroScreenshotDark = await optimise(heroPhonesDark, [600, 900, 1200, 1800])
-// featured project: the Cerro Rico story page, cropped from the top into the
-// 16:10 panel, in both themes
-const workScreenshot = await optimise(rssCerroRico)
+// featured project: a story page, cropped from the top into the 16:10 panel.
+// TODO: the dark one is still Cerro Rico until there's a dark Bay of Pigs
+const workScreenshot = await optimise(rssBayOfPigs)
 const workScreenshotDark = await optimise(rssCerroRicoDark)
 ---
 

@@ -7,7 +7,6 @@ import { UnevenButton } from "./uneven-button";
 import {
   caseStudyPath,
   facts,
-  pullLine,
   siteUrl,
 } from "../data/real-spanish-stories";
 
@@ -24,7 +23,7 @@ export function Work({
         <div className="mb-12 flex flex-wrap items-end justify-between gap-8">
           <div>
             <p className="kicker">Featured project</p>
-            <h2 className="h2">Real Spanish Stories.</h2>
+            <h2 className="h2">Real Spanish Stories</h2>
           </div>
           <div className="flex flex-wrap items-center gap-5">
             <UnevenButton
@@ -62,7 +61,7 @@ export function Work({
               <ThemedScreenshot
                 light={screenshot}
                 dark={darkScreenshot}
-                alt="A story page on Real Spanish Stories: the Cerro Rico story, with a level picker beside it"
+                alt="A story page on Real Spanish Stories: the Bay of Pigs story, with a level picker beside it"
                 sizes="(min-width: 1280px) 790px, calc(100vw - 70px)"
                 className="block aspect-16/10 w-full object-cover object-top"
               />
@@ -71,9 +70,9 @@ export function Work({
 
           <div className="flex min-w-0 flex-[1_1_320px] flex-col gap-7 px-5 pt-6 pb-7 sm:px-9 sm:pt-9 sm:pb-10">
             <p className="text-[19px] leading-[1.55] text-pretty">
-              Short stories written for Spanish learners, read level by level.
-              We designed and built the whole thing — reading experience,
-              content system and the site around it.
+              Spanish learners listen to true stories from Latin American
+              history, each one read aloud by a real narrator. We designed and
+              built the site.
             </p>
 
             <dl>
@@ -89,10 +88,6 @@ export function Work({
                 </div>
               ))}
             </dl>
-
-            <p className="mt-auto rotate-[-1deg] font-hand text-[21px] leading-[1.35]">
-              &ldquo;{pullLine}&rdquo;
-            </p>
           </div>
         </div>
       </div>

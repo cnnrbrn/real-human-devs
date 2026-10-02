@@ -7,14 +7,10 @@ export const caseStudyPath = "/work/real-spanish-stories";
 // TODO before launch: confirm "We did" with the client — it came from the
 // design handoff, not from anything we could check on the live site.
 export const facts = [
-  { label: "What", value: "Content platform for language learners" },
+  { label: "What", value: "Audio stories for Spanish learners" },
   { label: "We did", value: "Design, build and hosting" },
-  { label: "Built for", value: "Reading on phones, one story at a time" },
+  { label: "Levels", value: "Four, from absolute beginner to advanced" },
 ];
-
-// TODO before launch: swap for a real client quote.
-export const pullLine =
-  "Written, designed and coded by people who actually read the stories.";
 
 // Counted from the live site on 30 Sep 2026 — update as stories are added.
 export const numbers = [

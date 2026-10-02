@@ -22,10 +22,6 @@ import newsShotDark from '../../assets/case-studies/real-spanish-stories/news-da
 import phoneStoryShotDark from '../../assets/case-studies/real-spanish-stories/phone-story-dark.png'
 import phoneHomeShotDark from '../../assets/case-studies/real-spanish-stories/phone-home-dark.png'
 
-// Written for potential clients: what it is and why it works, not how it's
-// built. Everything said about the product comes from the live site.
-
-// Level colours are Real Spanish Stories' own, so the dots match the shots.
 const levels = [
   { name: 'Absolute Beginner', colour: '#a2692b', body: 'Very short sentences and a tiny vocabulary.', verbs: '3 verbs per story' },
   { name: 'Beginner', colour: '#d93a24', body: 'Simple, everyday words in plain sentences.', verbs: '6 verbs per story' },
@@ -78,7 +74,7 @@ const shotSizes = '(min-width: 1100px) 700px, calc(100vw - 64px)'
     <section class="border-b-[1.5px] border-line bg-[radial-gradient(var(--dot)_1px,transparent_1.2px)] bg-size-[26px_26px]">
       <div class="container-page pt-22 pb-26">
         <div class="flex flex-wrap items-end justify-between gap-x-16 gap-y-10">
-          <div class="max-w-[46rem]">
+          <div class="max-w-184">
             <p class="kicker">Case study</p>
             <h1 class="font-hand text-[clamp(52px,7.4vw,104px)] leading-[0.98] font-bold tracking-[-0.01em]">
               Real Spanish Stories.
@@ -90,7 +86,7 @@ const shotSizes = '(min-width: 1100px) 700px, calc(100vw - 64px)'
             </p>
           </div>
 
-          <dl class="w-full max-w-[26rem]">
+          <dl class="w-full max-w-104">
             {facts.map((fact) => (
               <div class="grid grid-cols-[110px_1fr] gap-4 border-t-[1.5px] border-dashed border-rule py-3.5">
                 <dt class="font-hand text-[17px] text-muted">{fact.label}</dt>
@@ -152,9 +148,9 @@ const shotSizes = '(min-width: 1100px) 700px, calc(100vw - 64px)'
               class="grid grid-cols-[auto_1fr] items-baseline gap-x-4 gap-y-1 rounded-[6px_14px_8px_12px/12px_8px_14px_6px] border-[1.5px] border-line bg-card px-5 py-4 sm:px-6 sm:py-5"
               style={`transform: rotate(${[-0.6, 0.4, -0.3, 0.5][i]}deg)`}
             >
-              <span aria-hidden="true" class="size-3 translate-y-[-1px] rounded-full" style={`background:${level.colour}`}></span>
+              <span aria-hidden="true" class="size-3 -translate-y-px rounded-full" style={`background:${level.colour}`}></span>
               <h3 class="font-hand text-[24px] leading-[1.15] font-bold">{level.name}</h3>
-              <p class="col-start-2 text-[17px] leading-[1.5] text-muted">
+              <p class="col-start-2 text-[17px] leading-normal text-muted">
                 {level.body} <span class="whitespace-nowrap text-ink">{level.verbs}.</span>
               </p>
             </li>
@@ -210,10 +206,10 @@ const shotSizes = '(min-width: 1100px) 700px, calc(100vw - 64px)'
               </p>
             </div>
             <div class="flex flex-[1.6_1_480px] items-start justify-center gap-6 sm:gap-10">
-              <PhoneFrame className="w-[46%] max-w-[250px] rotate-[-2deg]">
+              <PhoneFrame className="w-[46%] max-w-62.5 -rotate-2">
                 <ThemedImage light={phoneHomeShot} dark={phoneHomeShotDark} alt="The homepage on a phone" widths={[320, 480, 750]} sizes="(min-width: 640px) 250px, 42vw" class="h-auto w-full" />
               </PhoneFrame>
-              <PhoneFrame className="mt-12 w-[46%] max-w-[250px] rotate-[1.5deg]">
+              <PhoneFrame className="mt-12 w-[46%] max-w-62.5 rotate-[1.5deg]">
                 <ThemedImage light={phoneStoryShot} dark={phoneStoryShotDark} alt="A story page on a phone, with its level buttons below the cover" widths={[320, 480, 750]} sizes="(min-width: 640px) 250px, 42vw" class="h-auto w-full" />
               </PhoneFrame>
             </div>
@@ -225,7 +221,7 @@ const shotSizes = '(min-width: 1100px) 700px, calc(100vw - 64px)'
     <!-- real voices -->
     <section class="border-b-[1.5px] border-line">
       <div class="container-page py-26">
-        <figure class="mx-auto max-w-[56rem] rotate-[-0.5deg] rounded-[8px_16px_10px_14px/14px_10px_16px_8px] border-[1.5px] border-line bg-peach px-5 py-8 shadow-[6px_7px_0_var(--line)] sm:px-14 sm:py-12">
+        <figure class="mx-auto max-w-4xl rotate-[-0.5deg] rounded-[8px_16px_10px_14px/14px_10px_16px_8px] border-[1.5px] border-line bg-peach px-5 py-8 shadow-[6px_7px_0_var(--line)] sm:px-14 sm:py-12">
           <p class="kicker">Why this one matters to us</p>
           <blockquote class="font-hand text-[clamp(30px,3.6vw,46px)] leading-[1.15] font-bold text-balance">
             “Each story is narrated by a real human, we don't use AI voices.”
@@ -240,8 +236,7 @@ const shotSizes = '(min-width: 1100px) 700px, calc(100vw - 64px)'
             button.
           </p>
         </figure>
-        <!-- TODO before launch: add a client quote here once there is one
-             (see pullLine in src/data/real-spanish-stories.ts) -->
+        <!-- TODO before launch: add a client quote here once there is one -->
       </div>
     </section>
 
@@ -253,7 +248,7 @@ const shotSizes = '(min-width: 1100px) 700px, calc(100vw - 64px)'
         <dl class="grid grid-cols-[repeat(auto-fit,minmax(min(100%,240px),1fr))] gap-8">
           {numbers.map((item) => (
             <div class="lift-card flex flex-col gap-2 rounded-[6px_14px_8px_12px/12px_8px_14px_6px] border-[1.5px] border-line bg-card px-5 py-6 sm:px-7 sm:py-8">
-              <dt class="order-2 text-[17px] leading-[1.5] text-muted">{item.label}</dt>
+              <dt class="order-2 text-[17px] leading-normal text-muted">{item.label}</dt>
               <dd class="order-1 font-hand text-[56px] leading-none font-bold text-orange-text">{item.value}</dd>
             </div>
           ))}
