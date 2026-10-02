@@ -1,25 +1,48 @@
 ---
 import Layout from '../layouts/Layout.astro'
-import { SiteNav } from '../components/site-nav'
-import { Hero } from '../components/hero'
-import { Services } from '../components/services'
-import { Process } from '../components/process'
-import { Work } from '../components/work'
-import { ContactCta } from '../components/contact-cta'
-import { SiteFooter } from '../components/site-footer'
+import { Logo } from '../components/logo'
+import { UnevenButton } from '../components/uneven-button'
 ---
 
-<Layout>
-  <div class="min-h-screen bg-background text-foreground">
-    <!-- island: mobile menu toggle + scrollspy, above the fold -->
-    <SiteNav client:load />
-    <main>
-      <Hero />
-      <Services />
-  
-      <!-- island: form state, below the fold -->
-      <ContactCta client:visible />
+<!-- Placeholder for the live site until dev is merged into main -->
+<Layout title="Real Human Devs — Coming soon">
+  <div
+    class="flex min-h-dvh flex-col bg-[radial-gradient(var(--dot)_1px,transparent_1.2px)] bg-size-[26px_26px]"
+  >
+    <header class="container-page w-full py-7">
+      <Logo height="40px" />
+    </header>
+
+    <main class="container-page flex w-full flex-1 flex-col items-start justify-center gap-7 py-16">
+      <p class="kicker">Coming soon</p>
+
+      <h1
+        class="font-hand text-[clamp(52px,7.4vw,92px)] leading-[0.98] font-bold tracking-[-0.01em] text-balance"
+      >
+        Tired of talking to AI? <span class="hl-peach">Talk to us.</span>
+      </h1>
+
+      <p class="max-w-[34ch] text-[21px] leading-[1.55] text-pretty text-muted">
+        A small team of senior designers and developers building web apps,
+        mobile apps and custom WordPress sites. Our new site is on its way — in
+        the meantime, say hello.
+      </p>
+
+      <UnevenButton
+        href="mailto:hello@realhumandevs.com"
+        size="lg"
+        rotate={-0.8}
+        radius="5px 12px 6px 14px / 14px 6px 12px 5px"
+        className="mt-2"
+      >
+        hello@realhumandevs.com
+      </UnevenButton>
     </main>
-    <SiteFooter />
+
+    <footer
+      class="container-page w-full border-t-[1.5px] border-dashed border-rule pt-5 pb-8 text-center font-hand text-[16px] text-muted"
+    >
+      © {new Date().getFullYear()} Real Human Devs
+    </footer>
   </div>
 </Layout>
