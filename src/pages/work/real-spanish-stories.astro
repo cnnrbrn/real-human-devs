@@ -5,7 +5,7 @@ import { SiteNav } from '../../components/site-nav'
 import { SiteFooter } from '../../components/site-footer'
 import { BrowserFrame, PhoneFrame } from '../../components/browser-frame'
 import { UnevenButton } from '../../components/uneven-button'
-import { facts, numbers, siteUrl } from '../../data/real-spanish-stories'
+import { facts, siteUrl } from '../../data/real-spanish-stories'
 
 import homeShot from '../../assets/case-studies/real-spanish-stories/home.png'
 import translateShot from '../../assets/case-studies/real-spanish-stories/story-translate.png'
@@ -215,44 +215,6 @@ const shotSizes = '(min-width: 1100px) 700px, calc(100vw - 64px)'
             </div>
           </div>
         </div>
-      </div>
-    </section>
-
-    <!-- real voices -->
-    <section class="border-b-[1.5px] border-line">
-      <div class="container-page py-26">
-        <figure class="mx-auto max-w-4xl rotate-[-0.5deg] rounded-[8px_16px_10px_14px/14px_10px_16px_8px] border-[1.5px] border-line bg-peach px-5 py-8 shadow-[6px_7px_0_var(--line)] sm:px-14 sm:py-12">
-          <p class="kicker">Why this one matters to us</p>
-          <blockquote class="font-hand text-[clamp(30px,3.6vw,46px)] leading-[1.15] font-bold text-balance">
-            “Each story is narrated by a real human, we don't use AI voices.”
-          </blockquote>
-          <figcaption class="mt-3 font-hand text-[18px] text-muted">
-            — from the Real Spanish Stories site
-          </figcaption>
-          <p class="mt-8 max-w-[52ch] text-[19px] leading-[1.6]">
-            It's the same idea this studio is built on. People can tell when
-            something was made with care by someone who cares about it — so
-            that's the standard we held the whole site to, down to the last
-            button.
-          </p>
-        </figure>
-        <!-- TODO before launch: add a client quote here once there is one -->
-      </div>
-    </section>
-
-    <!-- in numbers -->
-    <section class="border-b-[1.5px] border-line">
-      <div class="container-page py-26">
-        <p class="kicker">In numbers</p>
-        <h2 class="h2 mb-12">Where it stands today.</h2>
-        <dl class="grid grid-cols-[repeat(auto-fit,minmax(min(100%,240px),1fr))] gap-8">
-          {numbers.map((item) => (
-            <div class="lift-card flex flex-col gap-2 rounded-[6px_14px_8px_12px/12px_8px_14px_6px] border-[1.5px] border-line bg-card px-5 py-6 sm:px-7 sm:py-8">
-              <dt class="order-2 text-[17px] leading-normal text-muted">{item.label}</dt>
-              <dd class="order-1 font-hand text-[56px] leading-none font-bold text-orange-text">{item.value}</dd>
-            </div>
-          ))}
-        </dl>
       </div>
     </section>
 

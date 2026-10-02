@@ -11,11 +11,3 @@ export const facts = [
   { label: "We did", value: "Design, build and hosting" },
   { label: "Levels", value: "Four, from absolute beginner to advanced" },
 ];
-
-// Counted from the live site on 30 Sep 2026 — update as stories are added.
-export const numbers = [
-  { value: "5", label: "true stories from Latin American history" },
-  { value: "4", label: "levels of every story, beginner to advanced" },
-  { value: "20", label: "episodes, each read by a real narrator" },
-  { value: "Weekly", label: "easy Spanish news, free to everyone" },
-];
