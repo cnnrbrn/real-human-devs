@@ -1,4 +1,10 @@
-export function Logo({ className }: { className?: string }) {
+export function Logo({
+  className,
+  height = "1.5em",
+}: {
+  className?: string;
+  height?: string;
+}) {
   return (
     <span
       className={className}
@@ -8,7 +14,8 @@ export function Logo({ className }: { className?: string }) {
         whiteSpace: "nowrap",
       }}
     >
-      {/* Sized in em so call sites keep driving the logo with their text-* class.
+      {/* Sized in em by default so call sites can drive the logo with a text-*
+          class, or pass an explicit height.
           Swapped on the `dark` class rather than prefers-color-scheme, so it
           follows <ThemeToggle> instead of drifting from the rest of the page. */}
       {/* No inline `display` here — it would outrank `dark:hidden` and leave
@@ -19,7 +26,7 @@ export function Logo({ className }: { className?: string }) {
         width={128}
         height={39}
         className="dark:hidden"
-        style={{ height: "1.5em", width: "auto" }}
+        style={{ height, width: "auto" }}
       />
       <img
         src="/logo-dark.svg"
@@ -28,7 +35,7 @@ export function Logo({ className }: { className?: string }) {
         width={128}
         height={39}
         className="hidden dark:block"
-        style={{ height: "1.5em", width: "auto" }}
+        style={{ height, width: "auto" }}
       />
     </span>
   );

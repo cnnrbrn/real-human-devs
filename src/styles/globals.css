@@ -3,105 +3,58 @@
 @custom-variant dark (&:is(.dark *));
 
 @theme inline {
-  /* body copy + buttons */
-  --font-sans: var(--font-roboto), ui-sans-serif, system-ui, sans-serif;
-  /* hand-drawn accents: headings, the // labels, the $ prompts */
+  /* body copy + nav */
+  --font-sans: var(--font-barlow), ui-sans-serif, system-ui, sans-serif;
+  /* hand-drawn accents: headings, labels, buttons, tags */
   --font-hand: var(--font-kalam), 'Comic Sans MS', cursive;
-  --font-mono: var(--font-kalam), 'Comic Sans MS', cursive;
-  --font-display: var(--font-caveat), 'Comic Sans MS', cursive;
-  --color-hl-blue: var(--hl-blue);
-  --color-hl-pink: var(--hl-pink);
-  --color-hl-green: var(--hl-green);
-  --color-hl-yellow: var(--hl-yellow);
-  --color-sidebar-ring: var(--sidebar-ring);
-  --color-sidebar-border: var(--sidebar-border);
-  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
-  --color-sidebar-accent: var(--sidebar-accent);
-  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
-  --color-sidebar-primary: var(--sidebar-primary);
-  --color-sidebar-foreground: var(--sidebar-foreground);
-  --color-sidebar: var(--sidebar);
-  --color-chart-5: var(--chart-5);
-  --color-chart-4: var(--chart-4);
-  --color-chart-3: var(--chart-3);
-  --color-chart-2: var(--chart-2);
-  --color-chart-1: var(--chart-1);
-  --color-ring: var(--ring);
-  --color-input: var(--input);
-  --color-border: var(--border);
-  --color-destructive: var(--destructive);
-  --color-accent-foreground: var(--accent-foreground);
-  --color-accent: var(--accent);
-  --color-muted-foreground: var(--muted-foreground);
-  --color-muted: var(--muted);
-  --color-secondary-foreground: var(--secondary-foreground);
-  --color-secondary: var(--secondary);
-  --color-primary-foreground: var(--primary-foreground);
-  --color-primary: var(--primary);
-  --color-popover-foreground: var(--popover-foreground);
-  --color-popover: var(--popover);
-  --color-card-foreground: var(--card-foreground);
+
+  --color-paper: var(--paper);
   --color-card: var(--card);
-  --color-foreground: var(--foreground);
-  --color-background: var(--background);
-  --radius-sm: calc(var(--radius) * 0.6);
-  --radius-md: calc(var(--radius) * 0.8);
-  --radius-lg: var(--radius);
-  --radius-xl: calc(var(--radius) * 1.4);
-  --radius-2xl: calc(var(--radius) * 1.8);
-  --radius-3xl: calc(var(--radius) * 2.2);
-  --radius-4xl: calc(var(--radius) * 2.6);
+  --color-paper-deep: var(--paper-deep);
+  --color-ink: var(--ink);
+  --color-line: var(--line);
+  --color-muted: var(--muted);
+  --color-orange: var(--orange);
+  --color-orange-hover: var(--orange-hover);
+  --color-on-orange: var(--on-orange);
+  --color-peach: var(--peach);
+  --color-orange-text: var(--orange-text);
+  --color-rule: var(--rule);
+  --color-dot: var(--dot);
 }
 
 :root {
   color-scheme: light;
   /* self-hosted via @fontsource, imported in Layout.astro */
-  --font-caveat: 'Caveat Variable';
   --font-kalam: 'Kalam';
-  --font-roboto: 'Roboto Variable';
-  /* warm paper */
-  --background: oklch(0.965 0.017 85);
-  /* ink navy-black */
-  --foreground: oklch(0.27 0.035 265);
-  --card: oklch(0.99 0.012 95);
-  --card-foreground: oklch(0.27 0.035 265);
-  --popover: oklch(0.99 0.012 95);
-  --popover-foreground: oklch(0.27 0.035 265);
-  /* warm marker amber — #f7b24f */
-  --primary: oklch(0.811 0.139 73.2);
-  --primary-foreground: oklch(0.27 0.035 265);
-  --secondary: oklch(0.93 0.02 90);
-  --secondary-foreground: oklch(0.27 0.035 265);
-  --muted: oklch(0.93 0.02 90);
-  --muted-foreground: oklch(0.47 0.03 265);
-  /* highlighter mint — #b2fea9 */
-  --accent: oklch(0.927 0.136 141.9);
-  --accent-foreground: oklch(0.27 0.035 265);
-  --destructive: oklch(0.62 0.24 20);
-  --border: oklch(0.27 0.035 265);
-  --input: oklch(0.27 0.035 265);
-  --ring: oklch(0.62 0.23 250);
-  /* highlighter set — blue, pink, green, yellow */
-  --hl-blue: oklch(0.62 0.23 250);
-  --hl-pink: oklch(0.68 0.25 350);
-  --hl-green: oklch(0.75 0.21 145);
-  --hl-yellow: oklch(0.88 0.2 100);
-  --chart-1: var(--hl-blue);
-  --chart-2: var(--hl-pink);
-  --chart-3: var(--hl-green);
-  --chart-4: var(--hl-yellow);
-  --chart-5: oklch(0.62 0.24 20);
-  --radius: 0.5rem;
-  --sidebar: oklch(0.99 0.012 95);
-  --sidebar-foreground: oklch(0.27 0.035 265);
-  --sidebar-primary: oklch(0.52 0.19 255);
-  --sidebar-primary-foreground: oklch(0.98 0.015 95);
-  --sidebar-accent: oklch(0.91 0.16 105);
-  --sidebar-accent-foreground: oklch(0.27 0.035 265);
-  --sidebar-border: oklch(0.27 0.035 265);
-  --sidebar-ring: oklch(0.52 0.19 255);
-  /* how opaque the highlighter swipe is over the page — see .marker */
-  --marker-ink: color-mix(in oklch, var(--accent) 60%, transparent);
+  --font-barlow: 'Barlow';
+
+  /* cream paper */
+  --paper: #f9f3e6;
+  /* card / form surface */
+  --card: #fdf9f0;
+  /* case study image well */
+  --paper-deep: #f3ecdc;
+  /* text */
+  --ink: #242a38;
+  /* hairlines and hard shadows — the same ink in light, split out so the
+     dark theme can dim them without dimming the text */
+  --line: #242a38;
+  /* secondary text */
+  --muted: #4a4f5c;
+  /* primary / logo */
+  --orange: #f7b051;
+  --orange-hover: #f5a53a;
+  /* ink that sits on --orange: buttons and the selected chip */
+  --on-orange: #242a38;
+  /* highlight, hover tint, dot ring */
+  --peach: #fbe2bd;
+  /* kickers; readable on paper */
+  --orange-text: #b8741c;
+  /* dashed rules */
+  --rule: #b9b2a3;
+  /* hero dot grid */
+  --dot: #d9cfbb;
 }
 
 /* Dark theme — chalk on slate rather than ink on paper. The class is set by
@@ -109,162 +62,199 @@
    <ThemeToggle>; it pairs with `@custom-variant dark` at the top of this file. */
 .dark {
   color-scheme: dark;
-  /* near-neutral charcoal — only a trace of the ink navy left */
-  --background: oklch(0.21 0.01 265);
-  /* warm chalk */
-  --foreground: oklch(0.94 0.014 85);
+  --paper: oklch(0.21 0.01 265);
   --card: oklch(0.25 0.012 265);
-  --card-foreground: oklch(0.94 0.014 85);
-  --popover: oklch(0.25 0.012 265);
-  --popover-foreground: oklch(0.94 0.014 85);
-  /* amber is legible on both grounds, so it carries across unchanged */
-  --primary: oklch(0.811 0.139 73.2);
-  --primary-foreground: oklch(0.21 0.01 265);
-  --secondary: oklch(0.3 0.012 265);
-  --secondary-foreground: oklch(0.94 0.014 85);
-  --muted: oklch(0.3 0.012 265);
-  --muted-foreground: oklch(0.72 0.01 265);
-  --accent: oklch(0.927 0.136 141.9);
-  --accent-foreground: oklch(0.21 0.01 265);
-  --destructive: oklch(0.68 0.21 22);
-  /* dimmer than the light theme's near-black: a chalk-bright hairline on the
-     services grid would glare, while .doodle-box keeps using --foreground */
-  --border: oklch(0.4 0.011 265);
-  --input: oklch(0.4 0.011 265);
-  --ring: oklch(0.72 0.17 250);
-  --hl-blue: oklch(0.72 0.17 250);
-  --hl-pink: oklch(0.78 0.18 350);
-  --hl-green: oklch(0.82 0.17 145);
-  --hl-yellow: oklch(0.9 0.17 100);
-  --sidebar: oklch(0.25 0.012 265);
-  --sidebar-foreground: oklch(0.94 0.014 85);
-  --sidebar-primary: oklch(0.72 0.17 250);
-  --sidebar-primary-foreground: oklch(0.21 0.01 265);
-  --sidebar-accent: oklch(0.9 0.17 100);
-  --sidebar-accent-foreground: oklch(0.21 0.01 265);
-  --sidebar-border: oklch(0.4 0.011 265);
-  --sidebar-ring: oklch(0.72 0.17 250);
-  /* A translucent wash rather than a filled swipe: marker ink soaked into dark
-     paper. Composites to ~#455d47 over the page, which the chalk foreground
-     reads on at 6:1 — so ascenders poking above the 42% band stay legible
-     without recolouring the text. Past ~0.40 the chalk drops below 4.5:1. */
-  --marker-ink: color-mix(in oklch, var(--accent) 30%, transparent);
+  --paper-deep: oklch(0.185 0.01 265);
+  /* warm chalk */
+  --ink: oklch(0.94 0.014 85);
+  /* a chalk-bright hairline on every card would glare, so borders and
+     shadows sit a step below the text */
+  --line: oklch(0.62 0.012 85);
+  --muted: oklch(0.76 0.01 265);
+  /* amber is legible on both grounds, so it carries across unchanged, and
+     keeps its dark ink so the buttons still read as stickers */
+  --orange: #f7b051;
+  --orange-hover: #f5a53a;
+  --on-orange: #242a38;
+  /* a deep ember wash under chalk text. Mid-dark amber goes muddy brown, so
+     this sits much darker and leans redder, leaving the bright amber to the
+     buttons and kickers */
+  --peach: oklch(0.27 0.07 45);
+  --orange-text: #f7b051;
+  --rule: oklch(0.42 0.011 265);
+  --dot: oklch(0.33 0.012 265);
 }
 
 @layer base {
-  * {
-    @apply border-border outline-ring/50;
+  html {
+    /* clears the sticky header when jumping to an anchor */
+    scroll-padding-top: 90px;
+  }
+  @media (prefers-reduced-motion: no-preference) {
+    html {
+      scroll-behavior: smooth;
+    }
   }
   body {
-    @apply bg-background text-foreground;
-    /* faint ruled-paper lines */
-    background-image: linear-gradient(
-      to bottom,
-      transparent,
-      transparent calc(2rem - 1px),
-      color-mix(in oklch, var(--primary) 8%, transparent) calc(2rem - 1px),
-      color-mix(in oklch, var(--primary) 8%, transparent) 2rem
+    @apply bg-paper font-sans text-ink antialiased;
+    /* the design sets sizes in px and leaves line-height to each font's own
+       metrics (Kalam's runs taller than preflight's 1.5) */
+    line-height: normal;
+  }
+  :focus-visible {
+    outline: 2px solid var(--ink);
+    outline-offset: 3px;
+  }
+}
+
+@layer components {
+  /* Every section's inner wrapper */
+  .container-page {
+    max-width: 1280px;
+    margin-inline: auto;
+    padding-inline: 32px;
+  }
+
+  .kicker {
+    font-family: var(--font-hand);
+    /* 18px on phones (keeps the hero's "Just shipped" label on one line)
+       up to 24px on desktop, where 18px got lost under the 76px headings */
+    font-size: clamp(18px, 0.9vw + 12px, 24px);
+    color: var(--orange-text);
+    margin-bottom: 8px;
+  }
+  .kicker::before {
+    content: '// ';
+  }
+
+  .h2 {
+    font-family: var(--font-hand);
+    font-weight: 700;
+    font-size: clamp(44px, 5.6vw, 76px);
+    line-height: 1;
+  }
+
+  /* form labels + footer column headings */
+  .label {
+    font-family: var(--font-hand);
+    font-size: 15px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+
+  /* Hero "Talk to us." emphasis. Two treatments so the client can swap:
+     .hl-peach (chosen) or .hl-wavy. */
+  .hl-peach {
+    background: linear-gradient(
+      transparent 38%,
+      var(--peach) 38%,
+      var(--peach) 92%,
+      transparent 92%
     );
-    background-size: 100% 2rem;
+    padding: 0 10px;
+    margin-left: -10px;
+    white-space: nowrap;
   }
-}
-
-/* --- hand-drawn helpers --- */
-
-/* wobbly "sketched" box outline. The line colour comes from --doodle-line so
-   a box can override it without touching the shadow — see .doodle-ink. */
-.doodle-box {
-  border: 2px solid var(--doodle-line, var(--foreground));
-  border-radius: 255px 15px 225px 15px / 15px 225px 15px 255px;
-}
-.doodle-box-alt {
-  border: 2px solid var(--doodle-line, var(--foreground));
-  border-radius: 15px 225px 15px 255px / 255px 15px 225px 15px;
-}
-.doodle-box-sm {
-  border: 2px solid var(--doodle-line, var(--foreground));
-  border-radius: 40px 8px 40px 8px / 8px 40px 8px 40px;
-}
-
-/* For boxes filled with --primary: outline in the ink that sits on amber
-   rather than the page's foreground. In light mode --primary-foreground is
-   the same ink the border already used, so nothing changes; in dark mode it
-   keeps the outline dark against the light amber while .doodle-shadow stays
-   on --foreground and lifts the button off the page. */
-.doodle-ink {
-  --doodle-line: var(--primary-foreground);
-}
-
-/* subtle marker-drawn shadow so cards lift off the page */
-.doodle-shadow {
-  box-shadow: 4px 5px 0 0 var(--foreground);
-}
-
-/* Hover lift for the sketched buttons: the sticker peels up off the page and
-   its marker shadow grows to match, then presses back down on click. The
-   raise is translate + shadow only — --doodle-tilt defaults to 0 because even
-   1.4deg swings a wide button's corners further than the lift itself, which
-   reads as a wobble rather than a rise. It stays folded into this transform
-   so a button can opt back in; a separate rotate rule would replace this
-   declaration rather than compose with it. */
-.doodle-lift {
-  transition:
-    transform 150ms ease-out,
-    box-shadow 150ms ease-out;
-}
-.doodle-lift:hover {
-  transform: translate(-1px, -2px) rotate(var(--doodle-tilt, 0deg));
-}
-.doodle-lift.doodle-shadow:hover {
-  box-shadow: 5px 6px 0 0 var(--foreground);
-}
-.doodle-lift:active {
-  transform: translate(1px, 1px) rotate(var(--doodle-tilt, 0deg));
-}
-.doodle-lift.doodle-shadow:active {
-  box-shadow: 3px 4px 0 0 var(--foreground);
-}
-@media (prefers-reduced-motion: reduce) {
-  .doodle-lift {
-    transition: none;
+  .hl-wavy {
+    white-space: nowrap;
+    text-decoration: underline wavy var(--orange);
+    text-decoration-thickness: 6px;
+    text-underline-offset: 14px;
+    text-decoration-skip-ink: none;
   }
-}
-.doodle-shadow-primary {
-  box-shadow: 4px 5px 0 0 var(--primary);
-}
 
-/* squiggly hand-drawn underline */
-.squiggle {
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='40' height='8' viewBox='0 0 40 8'%3E%3Cpath d='M0 4 Q5 0 10 4 T20 4 T30 4 T40 4' fill='none' stroke='%23ff3fa4' stroke-width='2.5' stroke-linecap='round'/%3E%3C/svg%3E");
-  background-repeat: repeat-x;
-  background-position: 0 100%;
-  background-size: 40px 8px;
-  padding-bottom: 8px;
-}
+  /* Uneven button — see components/uneven-button.tsx. Rotation, radius and
+     the shadow offsets are custom properties so each instance can pass its
+     own and the hover/active transforms keep composing with the tilt. */
+  .uneven-btn {
+    --btn-rotate: 0deg;
+    --btn-sx: 5px;
+    --btn-sy: 6px;
+    --btn-press-x: 3px;
+    --btn-press-y: 4px;
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    font-family: var(--font-hand);
+    font-weight: 700;
+    text-decoration: none;
+    cursor: pointer;
+    border: 2px solid var(--on-orange);
+    border-radius: var(--btn-radius);
+    transform: rotate(var(--btn-rotate));
+    box-shadow: var(--btn-sx) var(--btn-sy) 0 var(--line);
+    transition:
+      transform 150ms ease-out,
+      box-shadow 150ms ease-out,
+      background-color 150ms ease-out;
+  }
+  .uneven-btn--sm {
+    font-size: 19px;
+    padding: 9px 22px 7px;
+  }
+  .uneven-btn--lg {
+    --btn-sx: 6px;
+    --btn-sy: 7px;
+    --btn-press-x: 4px;
+    --btn-press-y: 5px;
+    gap: 12px;
+    font-size: 22px;
+    padding: 14px 30px 11px;
+  }
+  .uneven-btn--primary {
+    background: var(--orange);
+    color: var(--on-orange);
+  }
+  .uneven-btn--secondary {
+    background: var(--card);
+    color: var(--ink);
+    border-color: var(--line);
+  }
+  .uneven-btn--secondary:hover {
+    background: var(--peach);
+  }
+  .uneven-btn--lift:hover {
+    transform: rotate(var(--btn-rotate)) translate(-2px, -2px);
+    box-shadow: calc(var(--btn-sx) + 2px) calc(var(--btn-sy) + 2px) 0
+      var(--line);
+  }
+  .uneven-btn:active {
+    transform: rotate(var(--btn-rotate))
+      translate(var(--btn-press-x), var(--btn-press-y));
+    box-shadow: 1px 1px 0 var(--line);
+  }
 
-/* highlighter swipe behind text — translucent ink, tapered ends, and a
-   slight tilt so it reads as a pen stroke rather than a filled rectangle */
-.marker {
-  background-image: linear-gradient(
-    98deg,
-    transparent 0%,
-    var(--marker-ink) 1.5%,
-    var(--marker-ink) 97%,
-    transparent 100%
-  );
-  background-repeat: no-repeat;
-  background-size: 100% 42%;
-  background-position: 0 76%;
-  padding: 0 0.18em;
-  border-radius: 0.12em;
-  /* Deliberately no `color` override: the swipe only covers 42% of the line,
-     so ascenders sit outside it and must stay legible against the page. Each
-     theme instead picks a --marker-ink that its own foreground reads on. */
-}
+  /* hard-shadowed card with a slight lift on hover (services) */
+  .lift-card {
+    box-shadow: 5px 6px 0 var(--line);
+    transition:
+      transform 150ms ease-out,
+      box-shadow 150ms ease-out;
+  }
+  .lift-card:hover {
+    transform: translate(-2px, -3px);
+    box-shadow: 7px 9px 0 var(--line);
+  }
 
-.-rotate-slight {
-  transform: rotate(-1.4deg);
-}
-.rotate-slight {
-  transform: rotate(1.4deg);
+  .field {
+    font-size: 17px;
+    color: var(--ink);
+    background: var(--paper);
+    border: 1.5px solid var(--line);
+    border-radius: 8px;
+    padding: 0 14px;
+  }
+  .field:focus {
+    outline: none;
+    background: var(--card);
+    box-shadow: 3px 3px 0 var(--orange);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .uneven-btn,
+    .lift-card {
+      transition: none;
+    }
+  }
 }
