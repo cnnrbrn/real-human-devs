@@ -8,11 +8,22 @@ const projectTypes = ["Web app", "Mobile app", "WordPress", "Not sure yet"];
 export function ContactCta() {
   const [selected, setSelected] = useState("Web app");
   const [sentTo, setSentTo] = useState<string | null>(null);
+  const [status, setStatus] = useState<"idle" | "sending" | "error">("idle");
 
-  function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
+  // Posts to the Pages Function in functions/api/contact.ts, which emails
+  // hello@ through Zoho.
+  async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
-    const name = String(new FormData(e.currentTarget).get("name") ?? "");
-    setSentTo(name.trim().split(/\s+/)[0] || "friend");
+    const data = new FormData(e.currentTarget);
+    setStatus("sending");
+    try {
+      const res = await fetch("/api/contact", { method: "POST", body: data });
+      if (!res.ok) throw new Error(`HTTP ${res.status}`);
+      const name = String(data.get("name") ?? "");
+      setSentTo(name.trim().split(/\s+/)[0] || "friend");
+    } catch {
+      setStatus("error");
+    }
   }
 
   return (
@@ -42,7 +53,7 @@ export function ContactCta() {
           {sentTo !== null ? (
             <div role="status" className="flex flex-col gap-3 py-6">
               <h3 className="font-hand text-[40px] leading-[1.05] font-bold">
-                Got it — thanks, {sentTo}.
+                Got it, thanks, {sentTo}.
               </h3>
               <p className="text-[18px] leading-[1.55] text-muted">
                 One of us will read this properly and write back within a
@@ -54,6 +65,16 @@ export function ContactCta() {
               <fieldset className="flex flex-col gap-3">
                 <legend className="label mb-3">Project type</legend>
                 <input type="hidden" name="projectType" value={selected} />
+                {/* honeypot: hidden from people and screen readers, so only
+                    bots fill it in — the function drops those quietly */}
+                <input
+                  type="text"
+                  name="website"
+                  tabIndex={-1}
+                  autoComplete="off"
+                  aria-hidden="true"
+                  className="absolute left-[-9999px] h-px w-px opacity-0"
+                />
                 <div className="flex flex-wrap gap-2.5">
                   {projectTypes.map((type) => (
                     <button
@@ -107,15 +128,35 @@ export function ContactCta() {
                 />
               </label>
 
+              {status === "error" && (
+                <p role="alert" className="text-[17px] leading-[1.55]">
+                  That didn&apos;t send. Please try again, or email us at{" "}
+                  <a
+                    href="mailto:hello@realhumandevs.com"
+                    className="underline underline-offset-[5px]"
+                  >
+                    hello@realhumandevs.com
+                  </a>
+                  .
+                </p>
+              )}
+
               <UnevenButton
                 type="submit"
                 size="lg"
                 rotate={-0.5}
                 radius="8px 14px 6px 12px / 12px 6px 14px 8px"
                 lift={false}
-                className="w-full justify-center p-3.5 text-[21px] [--btn-sx:5px] [--btn-sy:6px] hover:bg-orange-hover"
+                disabled={status === "sending"}
+                className="w-full justify-center p-3.5 text-[21px] [--btn-sx:5px] [--btn-sy:6px] hover:bg-orange-hover disabled:cursor-wait disabled:opacity-70"
               >
-                Send message <span aria-hidden="true">↗</span>
+                {status === "sending" ? (
+                  "Sending…"
+                ) : (
+                  <>
+                    Send message <span aria-hidden="true">↗</span>
+                  </>
+                )}
               </UnevenButton>
             </form>
           )}
