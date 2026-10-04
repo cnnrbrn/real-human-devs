@@ -84,7 +84,10 @@ export function SiteNav({ current }: { current?: string }) {
       <div className="container-page flex items-center justify-between gap-4 py-3.5 lg:gap-6">
         {/* a touch smaller on phones so the logo, toggle and menu button
             share one row down to 320px */}
-        <a href="/" className="flex shrink-0 [--logo-h:44px] sm:[--logo-h:58px]">
+        <a
+          href="/"
+          className="flex shrink-0 [--logo-h:44px] sm:[--logo-h:58px]"
+        >
           <Logo height="var(--logo-h)" />
         </a>
 

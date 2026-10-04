@@ -13,7 +13,10 @@ type Props = {
   children: ReactNode;
 } & (
   | ({ href: string } & Omit<ComponentPropsWithoutRef<"a">, "className">)
-  | ({ href?: undefined } & Omit<ComponentPropsWithoutRef<"button">, "className">)
+  | ({ href?: undefined } & Omit<
+      ComponentPropsWithoutRef<"button">,
+      "className"
+    >)
 );
 
 /** Hand-cut button with a hard offset shadow. Styles live in globals.css. */

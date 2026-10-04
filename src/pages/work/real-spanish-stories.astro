@@ -1,67 +1,87 @@
 ---
-import ThemedImage from '../../components/themed-image.astro'
-import Layout from '../../layouts/Layout.astro'
-import { SiteNav } from '../../components/site-nav'
-import { SiteFooter } from '../../components/site-footer'
-import { BrowserFrame, PhoneFrame } from '../../components/browser-frame'
-import { UnevenButton } from '../../components/uneven-button'
-import { caseStudyPath, facts, siteUrl } from '../../data/real-spanish-stories'
+import ThemedImage from "../../components/themed-image.astro";
+import Layout from "../../layouts/Layout.astro";
+import { SiteNav } from "../../components/site-nav";
+import { SiteFooter } from "../../components/site-footer";
+import { BrowserFrame, PhoneFrame } from "../../components/browser-frame";
+import { UnevenButton } from "../../components/uneven-button";
+import { caseStudyPath, facts, siteUrl } from "../../data/real-spanish-stories";
 
-import homeShot from '../../assets/case-studies/real-spanish-stories/home.png'
-import translateShot from '../../assets/case-studies/real-spanish-stories/story-translate.png'
-import libraryShot from '../../assets/case-studies/real-spanish-stories/stories.png'
-import newsShot from '../../assets/case-studies/real-spanish-stories/news.png'
-import lightStoryShot from '../../assets/case-studies/real-spanish-stories/story-light.png'
-import darkStoryShot from '../../assets/case-studies/real-spanish-stories/story-dark.png'
-import phoneStoryShot from '../../assets/case-studies/real-spanish-stories/phone-story.png'
-import phoneHomeShot from '../../assets/case-studies/real-spanish-stories/phone-home.png'
-import homeShotDark from '../../assets/case-studies/real-spanish-stories/home-dark.png'
-import translateShotDark from '../../assets/case-studies/real-spanish-stories/story-translate-dark.png'
-import libraryShotDark from '../../assets/case-studies/real-spanish-stories/stories-dark.png'
-import newsShotDark from '../../assets/case-studies/real-spanish-stories/news-dark.png'
-import phoneStoryShotDark from '../../assets/case-studies/real-spanish-stories/phone-story-dark.png'
-import phoneHomeShotDark from '../../assets/case-studies/real-spanish-stories/phone-home-dark.png'
+import homeShot from "../../assets/case-studies/real-spanish-stories/home.png";
+import translateShot from "../../assets/case-studies/real-spanish-stories/story-translate.png";
+import libraryShot from "../../assets/case-studies/real-spanish-stories/stories.png";
+import newsShot from "../../assets/case-studies/real-spanish-stories/news.png";
+import lightStoryShot from "../../assets/case-studies/real-spanish-stories/story-light.png";
+import darkStoryShot from "../../assets/case-studies/real-spanish-stories/story-dark.png";
+import phoneStoryShot from "../../assets/case-studies/real-spanish-stories/phone-story.png";
+import phoneHomeShot from "../../assets/case-studies/real-spanish-stories/phone-home.png";
+import homeShotDark from "../../assets/case-studies/real-spanish-stories/home-dark.png";
+import translateShotDark from "../../assets/case-studies/real-spanish-stories/story-translate-dark.png";
+import libraryShotDark from "../../assets/case-studies/real-spanish-stories/stories-dark.png";
+import newsShotDark from "../../assets/case-studies/real-spanish-stories/news-dark.png";
+import phoneStoryShotDark from "../../assets/case-studies/real-spanish-stories/phone-story-dark.png";
+import phoneHomeShotDark from "../../assets/case-studies/real-spanish-stories/phone-home-dark.png";
 
 const levels = [
-  { name: 'Absolute Beginner', colour: '#a2692b', body: 'Very short sentences and a tiny vocabulary.', verbs: '3 verbs per story' },
-  { name: 'Beginner', colour: '#d93a24', body: 'Simple, everyday words in plain sentences.', verbs: '6 verbs per story' },
-  { name: 'Intermediate', colour: '#4f7457', body: 'A broader vocabulary and more varied grammar.', verbs: '10 verbs per story' },
-  { name: 'Advanced', colour: '#1f6fd1', body: 'Rich, idiomatic Spanish close to native level.', verbs: '15+ verbs per story' },
-]
+  {
+    name: "Absolute Beginner",
+    colour: "#a2692b",
+    body: "Very short sentences and a tiny vocabulary.",
+    verbs: "3 verbs per story",
+  },
+  {
+    name: "Beginner",
+    colour: "#d93a24",
+    body: "Simple, everyday words in plain sentences.",
+    verbs: "6 verbs per story",
+  },
+  {
+    name: "Intermediate",
+    colour: "#4f7457",
+    body: "A broader vocabulary and more varied grammar.",
+    verbs: "10 verbs per story",
+  },
+  {
+    name: "Advanced",
+    colour: "#1f6fd1",
+    body: "Rich, idiomatic Spanish close to native level.",
+    verbs: "15+ verbs per story",
+  },
+];
 
 const features = [
   {
-    title: 'Tap any word, see what it means.',
+    title: "Tap any word, see what it means.",
     body: "Every story has its full transcript underneath. When a word is unfamiliar, tap it and the English appears straight away, right beside the text.",
     image: translateShot,
     dark: translateShotDark,
-    alt: 'A story transcript with the Spanish word “plata” highlighted and its translation, “silver”, shown in a side panel',
+    alt: "A story transcript with the Spanish word “plata” highlighted and its translation, “silver”, shown in a side panel",
   },
   {
-    title: 'One story, four levels.',
+    title: "One story, four levels.",
     body: "The library groups each story with its four versions, colour-coded by level, so it's obvious where to start. From any story, learners can step up or down a level in one tap.",
     image: libraryShot,
     dark: libraryShotDark,
-    alt: 'The story library: each story shown as four colour-coded covers, one per level',
+    alt: "The story library: each story shown as four colour-coded covers, one per level",
   },
   {
-    title: 'Something new every week.',
-    body: 'Alongside the stories there’s a free weekly news episode: real Latin American news, read slowly in clear Argentine Spanish, with the same tap-to-translate transcript.',
+    title: "Something new every week.",
+    body: "Alongside the stories there’s a free weekly news episode: real Latin American news, read slowly in clear Argentine Spanish, with the same tap-to-translate transcript.",
     image: newsShot,
     dark: newsShotDark,
-    alt: 'The Easy Spanish News page, listing weekly episodes with their dates',
+    alt: "The Easy Spanish News page, listing weekly episodes with their dates",
   },
   {
-    title: 'Light or dark, screen or paper.',
-    body: 'Readers pick a light or dark theme, and every story downloads as a free PDF in either, for reading offline.',
+    title: "Light or dark, screen or paper.",
+    body: "Readers pick a light or dark theme, and every story downloads as a free PDF in either, for reading offline.",
     // deliberately inverted: each theme shows off the other one
     image: darkStoryShot,
     dark: lightStoryShot,
-    alt: 'A story page with its cover, level picker and PDF download links',
+    alt: "A story page with its cover, level picker and PDF download links",
   },
-]
+];
 
-const shotSizes = '(min-width: 1100px) 700px, calc(100vw - 64px)'
+const shotSizes = "(min-width: 1100px) 700px, calc(100vw - 64px)";
 ---
 
 <Layout
@@ -71,14 +91,14 @@ const shotSizes = '(min-width: 1100px) 700px, calc(100vw - 64px)'
   imageAlt="Real Spanish Stories case study: the Cerro Rico story page, with its video and four levels"
   type="article"
   jsonLd={{
-    '@type': 'CreativeWork',
-    name: 'Real Spanish Stories case study',
+    "@type": "CreativeWork",
+    name: "Real Spanish Stories case study",
     description:
-      'How we designed and built Real Spanish Stories: true stories from Latin American history, read aloud by real people, at four levels of Spanish.',
+      "How we designed and built Real Spanish Stories: true stories from Latin American history, read aloud by real people, at four levels of Spanish.",
     url: new URL(caseStudyPath, Astro.site).href,
-    image: new URL('/og/real-spanish-stories.png', Astro.site).href,
-    creator: { '@id': new URL('/#organization', Astro.site).href },
-    about: { '@type': 'WebSite', name: 'Real Spanish Stories', url: siteUrl },
+    image: new URL("/og/real-spanish-stories.png", Astro.site).href,
+    creator: { "@id": new URL("/#organization", Astro.site).href },
+    about: { "@type": "WebSite", name: "Real Spanish Stories", url: siteUrl },
   }}
 >
   <SiteNav client:load current="work" />
@@ -109,7 +129,12 @@ const shotSizes = '(min-width: 1100px) 700px, calc(100vw - 64px)'
             <div class="grid grid-cols-[110px_1fr] gap-4 border-y-[1.5px] border-dashed border-rule py-3.5">
               <dt class="font-hand text-[17px] text-muted">Live at</dt>
               <dd class="text-[17px]">
-                <a href={siteUrl} target="_blank" rel="noopener" class="underline underline-offset-4 hover:text-orange-text">
+                <a
+                  href={siteUrl}
+                  target="_blank"
+                  rel="noopener"
+                  class="underline underline-offset-4 hover:text-orange-text"
+                >
                   realspanishstories.com<span aria-hidden="true"> ↗</span>
                 </a>
               </dd>
@@ -161,10 +186,17 @@ const shotSizes = '(min-width: 1100px) 700px, calc(100vw - 64px)'
               class="grid grid-cols-[auto_1fr] items-baseline gap-x-4 gap-y-1 rounded-[6px_14px_8px_12px/12px_8px_14px_6px] border-[1.5px] border-line bg-card px-5 py-4 sm:px-6 sm:py-5"
               style={`transform: rotate(${[-0.6, 0.4, -0.3, 0.5][i]}deg)`}
             >
-              <span aria-hidden="true" class="size-3 -translate-y-px rounded-full" style={`background:${level.colour}`}></span>
-              <h3 class="font-hand text-[24px] leading-[1.15] font-bold">{level.name}</h3>
+              <span
+                aria-hidden="true"
+                class="size-3 -translate-y-px rounded-full"
+                style={`background:${level.colour}`}
+              ></span>
+              <h3 class="font-hand text-[24px] leading-[1.15] font-bold">
+                {level.name}
+              </h3>
               <p class="col-start-2 text-[17px] leading-normal text-muted">
-                {level.body} <span class="whitespace-nowrap text-ink">{level.verbs}.</span>
+                {level.body}{" "}
+                <span class="whitespace-nowrap text-ink">{level.verbs}.</span>
               </p>
             </li>
           ))}
@@ -188,19 +220,33 @@ const shotSizes = '(min-width: 1100px) 700px, calc(100vw - 64px)'
 
         <div class="flex flex-col gap-24">
           {features.map((feature, i) => (
-            <div class:list={['flex flex-wrap items-center gap-x-16 gap-y-8', i % 2 === 1 && 'flex-row-reverse']}>
+            <div
+              class:list={[
+                "flex flex-wrap items-center gap-x-16 gap-y-8",
+                i % 2 === 1 && "flex-row-reverse",
+              ]}
+            >
               <div class="flex-[1_1_320px]">
                 <h3 class="font-hand text-[clamp(30px,3vw,40px)] leading-[1.1] font-bold text-balance">
                   {feature.title}
                 </h3>
-                <p class="mt-4 max-w-[40ch] text-[19px] leading-[1.6] text-muted">{feature.body}</p>
+                <p class="mt-4 max-w-[40ch] text-[19px] leading-[1.6] text-muted">
+                  {feature.body}
+                </p>
               </div>
               <div class="min-w-0 flex-[1.6_1_480px]">
                 <BrowserFrame
                   url="realspanishstories.com"
-                  className={`rounded-lg border-[1.5px] border-line shadow-[6px_7px_0_var(--line)] ${i % 2 ? 'rotate-[0.6deg]' : 'rotate-[-0.6deg]'}`}
+                  className={`rounded-lg border-[1.5px] border-line shadow-[6px_7px_0_var(--line)] ${i % 2 ? "rotate-[0.6deg]" : "rotate-[-0.6deg]"}`}
                 >
-                  <ThemedImage light={feature.image} dark={feature.dark} alt={feature.alt} widths={[640, 960, 1400]} sizes={shotSizes} class="h-auto w-full" />
+                  <ThemedImage
+                    light={feature.image}
+                    dark={feature.dark}
+                    alt={feature.alt}
+                    widths={[640, 960, 1400]}
+                    sizes={shotSizes}
+                    class="h-auto w-full"
+                  />
                 </BrowserFrame>
               </div>
             </div>
@@ -213,17 +259,31 @@ const shotSizes = '(min-width: 1100px) 700px, calc(100vw - 64px)'
                 Just as good on a phone.
               </h3>
               <p class="mt-4 max-w-[40ch] text-[19px] leading-[1.6] text-muted">
-                People listen on the bus or on the sofa, so we designed every page
-                for a phone first, with the story at the top and the transcript
-                below.
+                People listen on the bus or on the sofa, so we designed every
+                page for a phone first, with the story at the top and the
+                transcript below.
               </p>
             </div>
             <div class="flex flex-[1.6_1_480px] items-start justify-center gap-6 sm:gap-10">
               <PhoneFrame className="w-[46%] max-w-62.5 -rotate-2">
-                <ThemedImage light={phoneHomeShot} dark={phoneHomeShotDark} alt="The homepage on a phone" widths={[320, 480, 750]} sizes="(min-width: 640px) 250px, 42vw" class="h-auto w-full" />
+                <ThemedImage
+                  light={phoneHomeShot}
+                  dark={phoneHomeShotDark}
+                  alt="The homepage on a phone"
+                  widths={[320, 480, 750]}
+                  sizes="(min-width: 640px) 250px, 42vw"
+                  class="h-auto w-full"
+                />
               </PhoneFrame>
               <PhoneFrame className="mt-12 w-[46%] max-w-62.5 rotate-[1.5deg]">
-                <ThemedImage light={phoneStoryShot} dark={phoneStoryShotDark} alt="A story page on a phone, with its level buttons below the cover" widths={[320, 480, 750]} sizes="(min-width: 640px) 250px, 42vw" class="h-auto w-full" />
+                <ThemedImage
+                  light={phoneStoryShot}
+                  dark={phoneStoryShotDark}
+                  alt="A story page on a phone, with its level buttons below the cover"
+                  widths={[320, 480, 750]}
+                  sizes="(min-width: 640px) 250px, 42vw"
+                  class="h-auto w-full"
+                />
               </PhoneFrame>
             </div>
           </div>

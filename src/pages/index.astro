@@ -1,16 +1,16 @@
 ---
-import { getImage } from 'astro:assets'
-import Layout from '../layouts/Layout.astro'
-import { SiteNav } from '../components/site-nav'
-import { Hero } from '../components/hero'
-import { Work } from '../components/work'
-import { Services } from '../components/services'
-import { ContactCta } from '../components/contact-cta'
-import { SiteFooter } from '../components/site-footer'
-import rssBayOfPigs from '../assets/rss-bay-of-pigs-light.png'
-import rssCerroRicoDark from '../assets/rss-cerro-rico-beginner-dark.png'
-import heroPhones from '../assets/hero-phones-light.png'
-import heroPhonesDark from '../assets/hero-phones-dark.png'
+import { getImage } from "astro:assets";
+import Layout from "../layouts/Layout.astro";
+import { SiteNav } from "../components/site-nav";
+import { Hero } from "../components/hero";
+import { Work } from "../components/work";
+import { Services } from "../components/services";
+import { ContactCta } from "../components/contact-cta";
+import { SiteFooter } from "../components/site-footer";
+import rssBayOfPigs from "../assets/rss-bay-of-pigs-light.png";
+import rssCerroRicoDark from "../assets/rss-cerro-rico-beginner-dark.png";
+import heroPhones from "../assets/hero-phones-light.png";
+import heroPhonesDark from "../assets/hero-phones-dark.png";
 
 // The sections are React components, which can't use <Image>, so optimise
 // here and hand them the result.
@@ -18,23 +18,26 @@ async function optimise(
   image: ImageMetadata,
   widths = [640, 960, 1280, image.width],
 ) {
-  const optimised = await getImage({ src: image, format: 'webp', widths })
+  const optimised = await getImage({ src: image, format: "webp", widths });
   return {
     src: optimised.src,
     srcSet: optimised.srcSet.attribute,
     width: image.width,
     height: image.height,
-  }
+  };
 }
 
 // hero: both phones from the case study as one flat image (rendered from that
 // page, transparent background), in both themes
-const heroScreenshot = await optimise(heroPhones, [600, 900, 1200, 1800])
-const heroScreenshotDark = await optimise(heroPhonesDark, [600, 900, 1200, 1800])
+const heroScreenshot = await optimise(heroPhones, [600, 900, 1200, 1800]);
+const heroScreenshotDark = await optimise(
+  heroPhonesDark,
+  [600, 900, 1200, 1800],
+);
 // featured project: a story page, cropped from the top into the 16:10 panel.
 // TODO: the dark one is still Cerro Rico until there's a dark Bay of Pigs
-const workScreenshot = await optimise(rssBayOfPigs)
-const workScreenshotDark = await optimise(rssCerroRicoDark)
+const workScreenshot = await optimise(rssBayOfPigs);
+const workScreenshotDark = await optimise(rssCerroRicoDark);
 ---
 
 <Layout>
