@@ -1,4 +1,4 @@
-@import 'tailwindcss';
+@import "tailwindcss";
 
 @custom-variant dark (&:is(.dark *));
 
@@ -6,7 +6,7 @@
   /* body copy + nav */
   --font-sans: var(--font-barlow), ui-sans-serif, system-ui, sans-serif;
   /* hand-drawn accents: headings, labels, buttons, tags */
-  --font-hand: var(--font-kalam), 'Comic Sans MS', cursive;
+  --font-hand: var(--font-kalam), "Comic Sans MS", cursive;
 
   --color-paper: var(--paper);
   --color-card: var(--card);
@@ -26,8 +26,8 @@
 :root {
   color-scheme: light;
   /* self-hosted via @fontsource, imported in Layout.astro */
-  --font-kalam: 'Kalam';
-  --font-barlow: 'Barlow';
+  --font-kalam: "Kalam";
+  --font-barlow: "Barlow";
 
   /* cream paper */
   --paper: #f9f3e6;
@@ -145,7 +145,7 @@
     margin-bottom: 8px;
   }
   .kicker::before {
-    content: '// ';
+    content: "// ";
   }
 
   .h2 {

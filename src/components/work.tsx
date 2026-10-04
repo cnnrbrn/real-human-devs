@@ -4,11 +4,7 @@ import {
   type Screenshot,
 } from "./browser-frame";
 import { UnevenButton } from "./uneven-button";
-import {
-  caseStudyPath,
-  facts,
-  siteUrl,
-} from "../data/real-spanish-stories";
+import { caseStudyPath, facts, siteUrl } from "../data/real-spanish-stories";
 
 export function Work({
   screenshot,
