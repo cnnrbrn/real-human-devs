@@ -7,11 +7,13 @@ The website for [realhumandevs.com](https://realhumandevs.com). It's built with
 
 ## Scripts
 
-| Command           | What it does                             |
-| ----------------- | ---------------------------------------- |
-| `npm run dev`     | Start the dev server at `localhost:4321` |
-| `npm run build`   | Build the site into `dist/`              |
-| `npm run preview` | Serve the built site locally             |
+| Command                | What it does                               |
+| ---------------------- | ------------------------------------------ |
+| `npm run dev`          | Start the dev server at `localhost:4321`   |
+| `npm run build`        | Build the site into `dist/`                |
+| `npm run preview`      | Serve the built site locally               |
+| `npm run format`       | Format every file with Prettier            |
+| `npm run format:check` | Check formatting without changing anything |
 
 ## Branches
 
