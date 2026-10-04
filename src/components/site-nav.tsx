@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Menu, X } from "lucide-react";
 import { Logo } from "./logo";
 import { ThemeToggle } from "./theme-toggle";
@@ -26,6 +26,19 @@ const activeLink =
 export function SiteNav({ current }: { current?: string }) {
   const [open, setOpen] = useState(false);
   const [active, setActive] = useState(current ?? links[0].id);
+  const toggleRef = useRef<HTMLButtonElement>(null);
+
+  // Esc closes the open menu and hands focus back to its toggle
+  useEffect(() => {
+    if (!open) return;
+    const onKeyDown = (e: KeyboardEvent) => {
+      if (e.key !== "Escape") return;
+      setOpen(false);
+      toggleRef.current?.focus();
+    };
+    document.addEventListener("keydown", onKeyDown);
+    return () => document.removeEventListener("keydown", onKeyDown);
+  }, [open]);
 
   // mark whichever section is sitting just under the sticky header
   useEffect(() => {
@@ -100,6 +113,7 @@ export function SiteNav({ current }: { current?: string }) {
         <div className="flex items-center gap-1 lg:hidden">
           <ThemeToggle />
           <button
+            ref={toggleRef}
             type="button"
             aria-label={open ? "Close menu" : "Open menu"}
             aria-expanded={open}
@@ -120,7 +134,7 @@ export function SiteNav({ current }: { current?: string }) {
                 href={link.href}
                 onClick={() => setOpen(false)}
                 aria-current={active === link.id ? "true" : undefined}
-                className={`rounded-md px-2 py-2.5 text-[17px] transition-colors hover:bg-peach hover:text-ink ${
+                className={`rounded-md px-2 py-2.5 text-[17px] transition-colors hover:bg-highlight hover:text-ink ${
                   active === link.id ? activeLink : "text-muted"
                 }`}
               >

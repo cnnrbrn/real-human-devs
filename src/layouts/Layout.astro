@@ -5,6 +5,8 @@ import '@fontsource/barlow/600.css'
 import '@fontsource/kalam/400.css'
 import '@fontsource/kalam/700.css'
 import '../styles/globals.css'
+// the hero h1's face, preloaded so the headline doesn't swap in late
+import kalamBold from '@fontsource/kalam/files/kalam-latin-700-normal.woff2?url'
 
 interface Props {
   title?: string
@@ -15,6 +17,8 @@ interface Props {
   type?: 'website' | 'article'
   /** Keep the page out of search results, and drop its canonical/og:url. */
   noindex?: boolean
+  /** Extra schema.org data for this page, beside the site-wide Organization. */
+  jsonLd?: Record<string, unknown>
 }
 
 const {
@@ -24,12 +28,34 @@ const {
   imageAlt = 'Real Human Devs: Tired of talking to AI? Talk to us. Web apps, mobile apps, WordPress and online shops.',
   type = 'website',
   noindex = false,
+  jsonLd,
 } = Astro.props
 
 // Always the live domain (astro.config `site`), so previews shared from
 // dev.realhumandevs.com still point people at the real site.
 const canonical = new URL(Astro.url.pathname, Astro.site)
 const imageUrl = new URL(image, Astro.site)
+
+const organization = {
+  '@type': 'Organization',
+  '@id': new URL('/#organization', Astro.site).href,
+  name: 'Real Human Devs',
+  url: new URL('/', Astro.site).href,
+  logo: new URL('/apple-icon.png', Astro.site).href,
+  email: 'hello@realhumandevs.com',
+  knowsAbout: [
+    'Web app development',
+    'Mobile app development',
+    'WordPress development',
+    'Shopify development',
+    'WooCommerce development',
+    'E-commerce',
+  ],
+}
+const structuredData = {
+  '@context': 'https://schema.org',
+  '@graph': jsonLd ? [organization, jsonLd] : [organization],
+}
 ---
 
 <!doctype html>
@@ -61,6 +87,20 @@ const imageUrl = new URL(image, Astro.site)
     {/* X reads og:title/description/image; it only needs the card type */}
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:image:alt" content={imageAlt} />
+
+    <link
+      rel="preload"
+      href={kalamBold}
+      as="font"
+      type="font/woff2"
+      crossorigin
+    />
+
+    <script
+      is:inline
+      type="application/ld+json"
+      set:html={JSON.stringify(structuredData)}
+    />
 
     {/* Runs before first paint so the page never flashes the wrong theme.
         is:inline keeps Astro from bundling/deferring it. Mirrors applyTheme()
@@ -110,6 +150,7 @@ const imageUrl = new URL(image, Astro.site)
       data-domains="realhumandevs.com,www.realhumandevs.com"></script>
   </head>
   <body>
+    <a href="#main" class="skip-link">Skip to content</a>
     <slot />
   </body>
 </html>

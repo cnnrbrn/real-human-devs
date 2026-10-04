@@ -5,7 +5,7 @@ import { SiteNav } from '../../components/site-nav'
 import { SiteFooter } from '../../components/site-footer'
 import { BrowserFrame, PhoneFrame } from '../../components/browser-frame'
 import { UnevenButton } from '../../components/uneven-button'
-import { facts, siteUrl } from '../../data/real-spanish-stories'
+import { caseStudyPath, facts, siteUrl } from '../../data/real-spanish-stories'
 
 import homeShot from '../../assets/case-studies/real-spanish-stories/home.png'
 import translateShot from '../../assets/case-studies/real-spanish-stories/story-translate.png'
@@ -70,9 +70,19 @@ const shotSizes = '(min-width: 1100px) 700px, calc(100vw - 64px)'
   image="/og/real-spanish-stories.png"
   imageAlt="Real Spanish Stories case study: the Cerro Rico story page, with its video and four levels"
   type="article"
+  jsonLd={{
+    '@type': 'CreativeWork',
+    name: 'Real Spanish Stories case study',
+    description:
+      'How we designed and built Real Spanish Stories: true stories from Latin American history, read aloud by real people, at four levels of Spanish.',
+    url: new URL(caseStudyPath, Astro.site).href,
+    image: new URL('/og/real-spanish-stories.png', Astro.site).href,
+    creator: { '@id': new URL('/#organization', Astro.site).href },
+    about: { '@type': 'WebSite', name: 'Real Spanish Stories', url: siteUrl },
+  }}
 >
   <SiteNav client:load current="work" />
-  <main>
+  <main id="main">
     <!-- intro -->
     <section class="border-b-[1.5px] border-line bg-[radial-gradient(var(--dot)_1px,transparent_1.2px)] bg-size-[26px_26px]">
       <div class="container-page pt-22 pb-26">

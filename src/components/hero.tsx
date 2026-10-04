@@ -23,7 +23,7 @@ export function Hero({
           <div className="flex rotate-[-1.5deg] items-center gap-2.5 whitespace-nowrap rounded-[14px_6px_12px_5px/5px_12px_6px_14px] border-[1.5px] border-line bg-card px-4.5 py-2 text-[16px]">
             <span
               aria-hidden="true"
-              className="size-2.5 rounded-full bg-orange shadow-[0_0_0_4px_var(--peach)]"
+              className="size-2.5 rounded-full bg-orange shadow-[0_0_0_4px_var(--highlight)]"
             />
             Taking new builds — Q4 2026
           </div> */}
@@ -31,7 +31,7 @@ export function Hero({
           <h1 className="font-hand text-[clamp(52px,7.4vw,92px)] leading-[0.98] font-bold tracking-[-0.01em] text-balance">
             Tired of talking to AI?{" "}
             {/* swap to .hl-wavy for the squiggle-underline treatment */}
-            <span className="hl-peach">Talk to us.</span>
+            <span className="hl-marker">Talk to us.</span>
           </h1>
 
           <p className="max-w-[34ch] text-[21px] leading-[1.55] text-pretty text-muted">

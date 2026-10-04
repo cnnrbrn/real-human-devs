@@ -90,7 +90,7 @@ export function ContactCta() {
                       className={`cursor-pointer rounded-md border-[1.5px] border-line px-4 pt-1.75 pb-1.25 font-hand text-[18px] transition-colors ${
                         selected === type
                           ? "bg-orange text-on-orange"
-                          : "bg-card text-ink hover:bg-peach"
+                          : "bg-card text-ink hover:bg-highlight"
                       }`}
                     >
                       {type}

@@ -40,7 +40,7 @@ const workScreenshotDark = await optimise(rssCerroRicoDark)
 <Layout>
   <!-- island: mobile menu toggle + scrollspy, above the fold -->
   <SiteNav client:load />
-  <main>
+  <main id="main">
     <Hero screenshot={heroScreenshot} darkScreenshot={heroScreenshotDark} />
     <Work screenshot={workScreenshot} darkScreenshot={workScreenshotDark} />
     <Services />

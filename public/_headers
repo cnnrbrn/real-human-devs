@@ -1,0 +1,12 @@
+# Cloudflare Pages response headers. Pages already sends
+# X-Content-Type-Options and Referrer-Policy. A CSP comes later: the inline
+# theme script, Astro islands and Umami need hashes or allowlists first.
+# Applies to dev too, so never put noindex here.
+
+/*
+  Permissions-Policy: camera=(), microphone=(), geolocation=(), payment=()
+  X-Frame-Options: DENY
+
+# hashed filenames, safe to cache for good
+/_astro/*
+  Cache-Control: public, max-age=31536000, immutable
