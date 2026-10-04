@@ -35,14 +35,13 @@ export function ContactCta() {
             <h2 className="h2">Tell us what you&apos;re building.</h2>
           </div>
           <p className="max-w-[40ch] text-[19px] leading-[1.6] text-muted">
-            Real humans read every message and we&apos;ll reply within one
-            business day.
+            We read every message and reply within one working day.
           </p>
           <p className="font-hand text-[21px] text-muted">
             Prefer email?{" "}
             <a
               href="mailto:hello@realhumandevs.com"
-              className="text-ink underline underline-offset-[5px]"
+              className="text-ink underline underline-offset-[5px] transition-colors hover:text-orange-text"
             >
               hello@realhumandevs.com
             </a>
@@ -56,8 +55,7 @@ export function ContactCta() {
                 Got it, thanks, {sentTo}.
               </h3>
               <p className="text-[18px] leading-[1.55] text-muted">
-                One of us will read this properly and write back within a
-                business day.
+                We&apos;ll reply within one working day.
               </p>
             </div>
           ) : (

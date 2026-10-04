@@ -12,8 +12,8 @@ interface Props {
 }
 
 const {
-  title = 'Real Human Devs — Web, App & WordPress Engineering',
-  description = 'A studio of real human engineers building web & mobile apps and custom WordPress themes and plugins — secure, tested, and ready to scale.',
+  title = 'Real Human Devs | Web, app and WordPress development',
+  description = 'A small studio of senior designers and developers. We build web apps, mobile apps and custom WordPress sites, and you work with the same people from start to finish.',
 } = Astro.props
 ---
 
@@ -64,6 +64,15 @@ const {
     />
     <link rel="icon" href="/favicon-32x32.png" sizes="32x32" />
     <link rel="apple-touch-icon" href="/apple-icon.png" />
+
+    {/* Umami analytics. data-domains makes the tracker ignore every host but
+        the live one, so dev.realhumandevs.com and localhost aren't counted. */}
+    <script
+      is:inline
+      defer
+      src="https://cloud.umami.is/script.js"
+      data-website-id="dda6738f-14a0-420a-9b9e-88592e2cebd4"
+      data-domains="realhumandevs.com,www.realhumandevs.com"></script>
   </head>
   <body>
     <slot />

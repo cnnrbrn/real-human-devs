@@ -2,19 +2,19 @@ const services = [
   {
     title: "Web design & development",
     description:
-      "Marketing sites, dashboards and full-stack web apps, custom CMS, marketing sites, dashboards and fundraising projects. Designed for speed, accessibility and conversion.",
+      "Full web apps, dashboards and marketing sites, including custom CMSs and fundraising sites. Built for any screen size.",
     tags: ["React", "Next.js", "Node.js", "Python", "Design systems"],
   },
   {
     title: "App design & development",
     description:
-      "iOS and Android mobile apps, from first wireframe to App Store. Thoughtful UX, maintainable code.",
+      "iOS and Android apps. We design the screens, build the app and get it through App Store and Google Play review.",
     tags: ["iOS", "Android", "React Native", "Flutter"],
   },
   {
     title: "Custom WordPress",
     description:
-      "Bespoke themes and plugins built to spec - no bloated page builders. Fast, editor-friendly, easy to maintain.",
+      "Custom themes and plugins, written by hand instead of assembled in a page builder. Your editors only see the fields they need.",
     tags: ["Custom themes", "Plugins", "Headless WP"],
   },
 ];

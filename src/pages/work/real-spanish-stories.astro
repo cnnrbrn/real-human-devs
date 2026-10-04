@@ -32,7 +32,7 @@ const levels = [
 const features = [
   {
     title: 'Tap any word, see what it means.',
-    body: "Every story has its full transcript underneath. When a word is unfamiliar, tap it and the English appears straight away, right beside the text. No dictionary tab, no losing your place.",
+    body: "Every story has its full transcript underneath. When a word is unfamiliar, tap it and the English appears straight away, right beside the text.",
     image: translateShot,
     dark: translateShotDark,
     alt: 'A story transcript with the Spanish word “plata” highlighted and its translation, “silver”, shown in a side panel',
@@ -65,7 +65,7 @@ const shotSizes = '(min-width: 1100px) 700px, calc(100vw - 64px)'
 ---
 
 <Layout
-  title="Real Spanish Stories — case study | Real Human Devs"
+  title="Real Spanish Stories case study | Real Human Devs"
   description="How we designed and built Real Spanish Stories: true stories from Latin American history, read aloud by real people, at four levels of Spanish."
 >
   <SiteNav client:load current="work" />
@@ -131,9 +131,9 @@ const shotSizes = '(min-width: 1100px) 700px, calc(100vw - 64px)'
           </div>
           <p class="max-w-[42ch] text-[19px] leading-[1.6] text-muted">
             Most beginner Spanish is the same few sentences about ordering
-            coffee. Real Spanish Stories takes a different route: true stories
-            from Latin American history — the Bay of Pigs, Maradona's Hand of
-            God, a silver mountain in Bolivia — retold in simple Spanish.
+            coffee. Real Spanish Stories tells true stories from Latin American
+            history instead: the Bay of Pigs, Maradona's Hand of God, a silver
+            mountain in Bolivia. Each one is retold in simple Spanish.
           </p>
           <p class="max-w-[42ch] text-[19px] leading-[1.6] text-muted">
             Each story is written four times, from a handful of verbs up to
@@ -165,11 +165,11 @@ const shotSizes = '(min-width: 1100px) 700px, calc(100vw - 64px)'
         <div class="mb-20 flex flex-wrap items-end justify-between gap-8">
           <div>
             <p class="kicker">What we built</p>
-            <h2 class="h2">Made for listening, not homework.</h2>
+            <h2 class="h2">Built for listening.</h2>
           </div>
           <p class="max-w-[40ch] text-[19px] leading-[1.55] text-muted">
-            Every story is a short video with its narration, plus everything a
-            learner needs to follow along.
+            Every story is a short video of the narration, with a transcript you
+            can tap to translate.
           </p>
         </div>
 
@@ -200,9 +200,9 @@ const shotSizes = '(min-width: 1100px) 700px, calc(100vw - 64px)'
                 Just as good on a phone.
               </h3>
               <p class="mt-4 max-w-[40ch] text-[19px] leading-[1.6] text-muted">
-                Listening practice happens on the bus and on the sofa, so every
-                page works on a small screen: the story up top, the levels a tap
-                away, and the transcript underneath.
+                People listen on the bus or on the sofa, so we designed every page
+                for a phone first, with the story at the top and the transcript
+                below.
               </p>
             </div>
             <div class="flex flex-[1.6_1_480px] items-start justify-center gap-6 sm:gap-10">
@@ -222,10 +222,9 @@ const shotSizes = '(min-width: 1100px) 700px, calc(100vw - 64px)'
     <section>
       <div class="container-page flex flex-col items-start gap-6 py-26">
         <p class="kicker">Your turn</p>
-        <h2 class="h2 max-w-[18ch]">Got an idea that deserves better than a template?</h2>
+        <h2 class="h2 max-w-[18ch]">Tell us about your project.</h2>
         <p class="max-w-[44ch] text-[19px] leading-[1.6] text-muted">
-          Tell us what you're building. A real person will read it and write
-          back within one business day.
+          We read every message and reply within one working day.
         </p>
         <UnevenButton
           href="/#contact"
