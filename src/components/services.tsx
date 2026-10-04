@@ -3,13 +3,33 @@ const services = [
     title: "Web design & development",
     description:
       "Full web apps, dashboards and marketing sites, including custom CMSs and fundraising sites. Built for any screen size.",
-    tags: ["React", "Next.js", "Node.js", "Python", "Design systems"],
+    tags: [
+      "React",
+      "Next.js",
+      "Node.js",
+      "Python",
+      "Design systems",
+      "Speed & accessibility",
+    ],
   },
   {
     title: "App design & development",
     description:
-      "iOS and Android apps. We design the screens, build the app and get it through App Store and Google Play review.",
+      "iOS and Android apps built with React Native or Flutter. We design the screens, build the app and get it through App Store and Google Play review.",
     tags: ["iOS", "Android", "React Native", "Flutter"],
+  },
+
+  {
+    title: "E-commerce",
+    description:
+      "Shops on Shopify or WooCommerce, or a custom store built from scratch. We connect the payment gateway you need, including bespoke integrations.",
+    tags: [
+      "Shopify",
+      "WooCommerce",
+      "Custom stores",
+      "Payment gateways",
+      "Liquid",
+    ],
   },
   {
     title: "Custom WordPress",
@@ -28,7 +48,7 @@ export function Services() {
           <h2 className="h2">What we&apos;re good at.</h2>
         </div>
 
-        <div className="grid grid-cols-[repeat(auto-fit,minmax(min(100%,300px),1fr))] gap-8">
+        <div className="grid gap-8 md:grid-cols-2">
           {services.map((service) => (
             <article
               key={service.title}
@@ -52,6 +72,16 @@ export function Services() {
               </ul>
             </article>
           ))}
+        </div>
+
+        <div className="mt-12 flex flex-col gap-2 border-y-[1.5px] border-dashed border-rule py-6 sm:flex-row sm:items-baseline sm:gap-8">
+          <h3 className="shrink-0 font-hand text-[24px] font-bold">
+            Already have a site?
+          </h3>
+          <p className="text-[17px] leading-[1.6] text-pretty text-muted">
+            We also look after sites after launch: updates, fixes, and speed and
+            accessibility work.
+          </p>
         </div>
       </div>
     </section>

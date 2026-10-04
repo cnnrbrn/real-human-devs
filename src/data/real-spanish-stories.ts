@@ -2,7 +2,7 @@
 // two can't drift apart.
 
 export const siteUrl = "https://realspanishstories.com/";
-export const caseStudyPath = "/work/real-spanish-stories";
+export const caseStudyPath = "/work/real-spanish-stories/";
 
 // TODO before launch: confirm "We did" with the client — it came from the
 // design handoff, not from anything we could check on the live site.

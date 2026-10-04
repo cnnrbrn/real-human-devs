@@ -10,7 +10,15 @@ interface Env {
 }
 
 const MAILBOX = 'hello@realhumandevs.com'
-const PROJECT_TYPES = ['Web app', 'Mobile app', 'WordPress', 'Not sure yet']
+// keep in step with projectTypes in src/components/contact-cta.tsx
+const PROJECT_TYPES = [
+  'Web app',
+  'Mobile app',
+  'WordPress',
+  'Online shop',
+  'Existing site',
+  'Not sure yet',
+]
 const EMAIL_PATTERN = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
 
 const json = (status: number, body: Record<string, unknown>) =>

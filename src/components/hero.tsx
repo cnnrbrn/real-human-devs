@@ -36,8 +36,8 @@ export function Hero({
 
           <p className="max-w-[34ch] text-[21px] leading-[1.55] text-pretty text-muted">
             A small team of senior designers and developers building web apps,
-            mobile apps and custom WordPress sites. You'll always know who
-            you're talking to.
+            mobile apps, online shops and WordPress sites. You talk directly to
+            the people building it.
           </p>
 
           <div className="mt-2 flex flex-wrap items-center gap-7">

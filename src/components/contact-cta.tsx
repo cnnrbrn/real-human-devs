@@ -3,7 +3,14 @@
 import { useState } from "react";
 import { UnevenButton } from "./uneven-button";
 
-const projectTypes = ["Web app", "Mobile app", "WordPress", "Not sure yet"];
+const projectTypes = [
+  "Web app",
+  "Mobile app",
+  "WordPress",
+  "Online shop",
+  "Existing site",
+  "Not sure yet",
+];
 
 export function ContactCta() {
   const [selected, setSelected] = useState("Web app");
