@@ -107,8 +107,8 @@ const structuredData = {
     <script is:inline>
       (function () {
         try {
-          var stored = localStorage.getItem("theme");
-          var dark = stored
+          const stored = localStorage.getItem("theme");
+          const dark = stored
             ? stored === "dark"
             : window.matchMedia("(prefers-color-scheme: dark)").matches;
           document.documentElement.classList.toggle("dark", dark);
@@ -118,7 +118,7 @@ const structuredData = {
               .querySelector('meta[name="theme-color"]')
               .setAttribute("content", "#16181d");
           }
-        } catch (e) {
+        } catch {
           /* storage blocked — fall back to the light default */
         }
       })();
