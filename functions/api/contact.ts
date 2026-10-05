@@ -3,6 +3,7 @@
 // domain's SPF/DKIM. Needs the `nodejs_compat` compatibility flag (set in the
 // Pages project's Runtime settings) for worker-mailer's sockets.
 import { WorkerMailer } from "worker-mailer";
+import { PROJECT_TYPES } from "../../src/data/project-types";
 
 interface Env {
   /** Zoho app-specific password for hello@ — a Pages secret, never in git. */
@@ -10,15 +11,6 @@ interface Env {
 }
 
 const MAILBOX = "hello@realhumandevs.com";
-// keep in step with projectTypes in src/components/contact-cta.tsx
-const PROJECT_TYPES = [
-  "Web app",
-  "Mobile app",
-  "WordPress",
-  "Online shop",
-  "Existing site",
-  "Not sure yet",
-];
 const EMAIL_PATTERN = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
 const json = (status: number, body: Record<string, unknown>) =>

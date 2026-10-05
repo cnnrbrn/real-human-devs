@@ -1,16 +1,8 @@
 "use client";
 
 import { useState } from "react";
+import { PROJECT_TYPES } from "../data/project-types";
 import { UnevenButton } from "./uneven-button";
-
-const projectTypes = [
-  "Web app",
-  "Mobile app",
-  "WordPress",
-  "Online shop",
-  "Existing site",
-  "Not sure yet",
-];
 
 export function ContactCta() {
   const [selected, setSelected] = useState("Web app");
@@ -81,7 +73,7 @@ export function ContactCta() {
                   className="absolute left-[-9999px] h-px w-px opacity-0"
                 />
                 <div className="flex flex-wrap gap-2.5">
-                  {projectTypes.map((type) => (
+                  {PROJECT_TYPES.map((type) => (
                     <button
                       key={type}
                       type="button"
