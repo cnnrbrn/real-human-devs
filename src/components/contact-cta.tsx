@@ -19,7 +19,7 @@ export function ContactCta() {
 
   // Posts to the Pages Function in functions/api/contact.ts, which emails
   // hello@ through Zoho.
-  async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
+  async function handleSubmit(e: React.SubmitEvent<HTMLFormElement>) {
     e.preventDefault();
     const data = new FormData(e.currentTarget);
     setStatus("sending");
