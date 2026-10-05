@@ -2,7 +2,7 @@ const services = [
   {
     title: "Web design & development",
     description:
-      "Full web apps, dashboards and marketing sites, including custom CMSs and fundraising sites. Built for any screen size.",
+      "Full web apps, dashboards and marketing sites, including fundraising sites and custom editing tools. They work on any screen size.",
     tags: [
       "React",
       "Next.js",
@@ -22,14 +22,8 @@ const services = [
   {
     title: "E-commerce",
     description:
-      "Shops on Shopify or WooCommerce, or a custom store built from scratch. We connect the payment gateway you need, including bespoke integrations.",
-    tags: [
-      "Shopify",
-      "WooCommerce",
-      "Custom stores",
-      "Payment gateways",
-      "Liquid",
-    ],
+      "Shops on Shopify, WooCommerce or built from scratch. We can connect any payment provider, including ones that need custom work.",
+    tags: ["Shopify", "WooCommerce", "Custom stores", "Payment gateways"],
   },
   {
     title: "Custom WordPress",
@@ -72,16 +66,6 @@ export function Services() {
               </ul>
             </article>
           ))}
-        </div>
-
-        <div className="mt-12 flex flex-col gap-2 border-y-[1.5px] border-dashed border-rule py-6 sm:flex-row sm:items-baseline sm:gap-8">
-          <h3 className="shrink-0 font-hand text-[24px] font-bold">
-            Already have a site?
-          </h3>
-          <p className="text-[17px] leading-[1.6] text-pretty text-muted">
-            We also look after sites after launch: updates, fixes, and speed and
-            accessibility work.
-          </p>
         </div>
       </div>
     </section>

@@ -82,6 +82,25 @@ export function BrowserFrame({
 }
 
 /** Sketchy phone: a hand-cut bezel around a rounded screen. */
+/** Sketchy tablet: like PhoneFrame, with tighter corners for the bigger screen. */
+export function TabletFrame({
+  className = "",
+  children,
+}: {
+  className?: string;
+  children: ReactNode;
+}) {
+  return (
+    <div
+      className={`rounded-[22px_26px_20px_24px] border-2 border-line bg-card p-2 shadow-[6px_7px_0_var(--line)] ${className}`}
+    >
+      <div className="overflow-hidden rounded-[14px] border-[1.5px] border-line">
+        {children}
+      </div>
+    </div>
+  );
+}
+
 export function PhoneFrame({
   className = "",
   children,
