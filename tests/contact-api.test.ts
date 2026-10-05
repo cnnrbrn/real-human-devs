@@ -155,3 +155,18 @@ describe("guards", () => {
     expect(sent()[1].reply).toMatchObject({ name: "A".repeat(200) });
   });
 });
+
+describe("when Zoho fails", () => {
+  it("logs the error and returns 502 so the form can show its fallback", async () => {
+    const error = new Error("SMTP connection refused");
+    send.mockRejectedValueOnce(error);
+    const log = vi.spyOn(console, "error").mockImplementation(() => {});
+
+    const res = await post(valid);
+
+    expect(res.status).toBe(502);
+    expect(await res.json()).toHaveProperty("error");
+    expect(log).toHaveBeenCalledWith("Contact form: SMTP send failed", error);
+    log.mockRestore();
+  });
+});
