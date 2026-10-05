@@ -66,9 +66,9 @@ export function Work({
 
           <div className="flex min-w-0 flex-[1_1_320px] flex-col gap-7 px-5 pt-6 pb-7 sm:px-9 sm:pt-9 sm:pb-10">
             <p className="text-[19px] leading-[1.55] text-pretty">
-              Spanish learners listen to true stories from Latin American
-              history, each one read aloud by a real narrator. We designed and
-              built the site.
+              True stories from Latin American history, told in Spanish that
+              beginners can follow, and read aloud by real narrators. We
+              designed and built the site.
             </p>
 
             <dl>

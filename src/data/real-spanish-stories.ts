@@ -4,10 +4,13 @@
 export const siteUrl = "https://realspanishstories.com/";
 export const caseStudyPath = "/work/real-spanish-stories/";
 
-// TODO before launch: confirm "We did" with the client — it came from the
-// design handoff, not from anything we could check on the live site.
 export const facts = [
-  { label: "What", value: "Audio stories for Spanish learners" },
-  { label: "We did", value: "Design, build and hosting" },
-  { label: "Levels", value: "Four, from absolute beginner to advanced" },
+  { label: "What", value: "Real Latin American stories for Spanish learners" },
+  { label: "Built", value: "Design, build and hosting" },
+  {
+    label: "Features",
+    value: "Captioned videos made automatically, and interactive translation",
+  },
+  { label: "Social", value: "YouTube and Instagram design" },
+  { label: "Levels", value: "Four, from Absolute Beginner to Advanced" },
 ];

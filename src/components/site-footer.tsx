@@ -8,7 +8,6 @@ const columns = [
       { label: "App development", href: "/#services" },
       { label: "Custom WordPress", href: "/#services" },
       { label: "E-commerce", href: "/#services" },
-      { label: "Support & maintenance", href: "/#services" },
     ],
   },
   {

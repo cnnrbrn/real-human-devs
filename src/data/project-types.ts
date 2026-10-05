@@ -5,6 +5,5 @@ export const PROJECT_TYPES: readonly string[] = [
   "Mobile app",
   "WordPress",
   "Online shop",
-  "Existing site",
   "Not sure yet",
 ];

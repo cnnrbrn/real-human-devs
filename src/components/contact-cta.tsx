@@ -121,7 +121,7 @@ export function ContactCta() {
                   name="message"
                   rows={4}
                   className="field resize-y py-3 leading-normal"
-                  placeholder="A few sentences about your project or the app you need help with…"
+                  placeholder="A few sentences about what you're building, or what you need help with…"
                 />
               </label>
 
