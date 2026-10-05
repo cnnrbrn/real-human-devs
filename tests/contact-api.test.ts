@@ -82,3 +82,34 @@ describe("a valid enquiry", () => {
     expect(sent()[1].subject).toBe("New enquiry from Ada Lovelace (Not given)");
   });
 });
+
+describe("validation", () => {
+  it.each([
+    ["no name", { name: "" }],
+    ["a blank name", { name: "   " }],
+    ["no message", { message: "" }],
+    ["no email", { email: "" }],
+    ["an email without @", { email: "ada.example.com" }],
+    ["an email without a domain", { email: "ada@example" }],
+  ])("rejects %s with 400 and sends nothing", async (_, change) => {
+    const res = await post({ ...valid, ...change });
+
+    expect(res.status).toBe(400);
+    expect(await res.json()).toHaveProperty("error");
+    expect(send).not.toHaveBeenCalled();
+  });
+
+  it("rejects a body that isn't form data", async () => {
+    const res = await onRequestPost({
+      request: new Request("https://realhumandevs.com/api/contact", {
+        method: "POST",
+        headers: { "content-type": "application/json" },
+        body: JSON.stringify(valid),
+      }),
+      env: { ZOHO_SMTP_PASSWORD: "test-password" },
+    });
+
+    expect(res.status).toBe(400);
+    expect(send).not.toHaveBeenCalled();
+  });
+});
