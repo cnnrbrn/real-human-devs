@@ -1,5 +1,5 @@
 // @vitest-environment jsdom
-import { render, screen } from "@testing-library/react";
+import { render, screen, within } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { afterEach, describe, expect, it, vi } from "vitest";
 import { ContactCta } from "../src/components/contact-cta";
@@ -46,5 +46,27 @@ describe("sending the form", () => {
     expect(await screen.findByRole("status")).toHaveTextContent(
       "Got it, thanks, Ada.",
     );
+  });
+
+  it.each([
+    [
+      "the API returns an error",
+      () => Promise.resolve(new Response(null, { status: 502 })),
+    ],
+    [
+      "the network is down",
+      () => Promise.reject(new TypeError("Failed to fetch")),
+    ],
+  ])("shows the email fallback when %s", async (_, response) => {
+    vi.stubGlobal("fetch", vi.fn(response));
+
+    await fillAndSend();
+
+    const alert = await screen.findByRole("alert");
+    expect(alert).toHaveTextContent("That didn't send");
+    expect(
+      within(alert).getByRole("link", { name: "hello@realhumandevs.com" }),
+    ).toHaveAttribute("href", "mailto:hello@realhumandevs.com");
+    expect(screen.getByRole("button", { name: /send message/i })).toBeEnabled();
   });
 });
