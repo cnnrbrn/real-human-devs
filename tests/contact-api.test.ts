@@ -113,3 +113,45 @@ describe("validation", () => {
     expect(send).not.toHaveBeenCalled();
   });
 });
+
+describe("guards", () => {
+  it("pretends a bot that fills the honeypot succeeded, and sends nothing", async () => {
+    const res = await post({ ...valid, website: "https://spam.example" });
+
+    expect(res.status).toBe(200);
+    expect(await res.json()).toEqual({ ok: true });
+    expect(send).not.toHaveBeenCalled();
+  });
+
+  it("can't add headers through line breaks in the name", async () => {
+    await post({ ...valid, name: "Ada\r\nBcc: victim@example.com" });
+
+    const [, email] = sent();
+    expect(email.subject).not.toMatch(/[\r\n]/);
+    expect(email.reply).toEqual({
+      name: "Ada Bcc: victim@example.com",
+      email: "ada@example.com",
+    });
+  });
+
+  it("rejects line breaks in the email", async () => {
+    const res = await post({
+      ...valid,
+      email: "ada@example.com\r\nBcc: victim@example.com",
+    });
+
+    expect(res.status).toBe(400);
+    expect(send).not.toHaveBeenCalled();
+  });
+
+  it("keeps line breaks in the message body", async () => {
+    await post({ ...valid, message: "Line one\nLine two" });
+    // multipart form data sends line breaks as \r\n, browsers included
+    expect(sent()[1].text).toMatch(/\n\nLine one\r?\nLine two$/);
+  });
+
+  it("trims fields and caps the name at 200 characters", async () => {
+    await post({ ...valid, name: `  ${"A".repeat(300)}  ` });
+    expect(sent()[1].reply).toMatchObject({ name: "A".repeat(200) });
+  });
+});
