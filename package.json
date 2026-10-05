@@ -10,7 +10,8 @@
     "astro": "astro",
     "format": "prettier --write .",
     "format:check": "prettier --check .",
-    "lint": "eslint ."
+    "lint": "eslint .",
+    "check": "astro check"
   },
   "dependencies": {
     "@astrojs/react": "^6.0.5",
@@ -26,6 +27,7 @@
     "worker-mailer": "^1.2.1"
   },
   "devDependencies": {
+    "@astrojs/check": "^0.9.10",
     "@eslint/js": "^9.39.5",
     "@types/react": "^19",
     "@types/react-dom": "^19",
