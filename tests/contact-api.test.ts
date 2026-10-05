@@ -1,0 +1,84 @@
+import { beforeEach, describe, expect, it, vi } from "vitest";
+import { WorkerMailer } from "worker-mailer";
+import { onRequestPost } from "../functions/api/contact";
+import { PROJECT_TYPES } from "../src/data/project-types";
+
+// Never talk to Zoho: every test sees a fake send.
+vi.mock("worker-mailer", () => ({ WorkerMailer: { send: vi.fn() } }));
+const send = vi.mocked(WorkerMailer.send);
+
+const valid = {
+  name: "Ada Lovelace",
+  email: "ada@example.com",
+  message: "We need a shop.",
+  projectType: "Online shop",
+};
+
+/** POST these fields to the handler, as the form would. */
+function post(fields: Record<string, string>) {
+  const body = new FormData();
+  for (const [key, value] of Object.entries(fields)) body.set(key, value);
+  return onRequestPost({
+    request: new Request("https://realhumandevs.com/api/contact", {
+      method: "POST",
+      body,
+    }),
+    env: { ZOHO_SMTP_PASSWORD: "test-password" },
+  });
+}
+
+/** The [server, email] arguments of the one send call. */
+function sent() {
+  expect(send).toHaveBeenCalledOnce();
+  return send.mock.calls[0];
+}
+
+beforeEach(() => {
+  send.mockReset();
+});
+
+describe("a valid enquiry", () => {
+  it("is sent to hello@ through Zoho and returns 200", async () => {
+    const res = await post(valid);
+
+    expect(res.status).toBe(200);
+    expect(await res.json()).toEqual({ ok: true });
+
+    const [server, email] = sent();
+    expect(server).toMatchObject({
+      host: "smtppro.zoho.com",
+      port: 465,
+      secure: true,
+      credentials: {
+        username: "hello@realhumandevs.com",
+        password: "test-password",
+      },
+    });
+    expect(email).toMatchObject({
+      to: "hello@realhumandevs.com",
+      reply: { name: "Ada Lovelace", email: "ada@example.com" },
+      subject: "New enquiry from Ada Lovelace (Online shop)",
+    });
+    expect(email.text).toBe(
+      [
+        "Name: Ada Lovelace",
+        "Email: ada@example.com",
+        "Project type: Online shop",
+        "",
+        "We need a shop.",
+      ].join("\n"),
+    );
+  });
+
+  it.each(PROJECT_TYPES)("keeps the project type %s", async (projectType) => {
+    await post({ ...valid, projectType });
+    expect(sent()[1].subject).toBe(
+      `New enquiry from Ada Lovelace (${projectType})`,
+    );
+  });
+
+  it('labels an unknown project type "Not given"', async () => {
+    await post({ ...valid, projectType: "Spaceship" });
+    expect(sent()[1].subject).toBe("New enquiry from Ada Lovelace (Not given)");
+  });
+});
