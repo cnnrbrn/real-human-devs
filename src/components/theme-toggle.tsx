@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useSyncExternalStore } from "react";
 import { Moon, Sun } from "lucide-react";
 
 const STORAGE_KEY = "theme";
@@ -12,17 +12,24 @@ function applyTheme(dark: boolean) {
   root.style.colorScheme = dark ? "dark" : "light";
   document
     .querySelector('meta[name="theme-color"]')
-    ?.setAttribute("content", dark ? "#16181d" : "#f4ecd8");
+    ?.setAttribute("content", dark ? "#16181d" : "#f9f3e6");
+}
+
+/** Re-render when the `dark` class on <html> changes, from any toggle. */
+function subscribe(onChange: () => void) {
+  const observer = new MutationObserver(onChange);
+  observer.observe(document.documentElement, { attributeFilter: ["class"] });
+  return () => observer.disconnect();
 }
 
 export function ThemeToggle({ className = "" }: { className?: string }) {
   // Only used for the label — the icons swap via the `dark:` variant so the
   // button renders correctly on first paint, before React hydrates.
-  const [dark, setDark] = useState(false);
-
-  useEffect(() => {
-    setDark(document.documentElement.classList.contains("dark"));
-  }, []);
+  const dark = useSyncExternalStore(
+    subscribe,
+    () => document.documentElement.classList.contains("dark"),
+    () => false,
+  );
 
   // Keep following the OS until the visitor makes an explicit choice.
   useEffect(() => {
@@ -34,7 +41,6 @@ export function ThemeToggle({ className = "" }: { className?: string }) {
         // storage blocked — fall through and follow the OS
       }
       applyTheme(e.matches);
-      setDark(e.matches);
     };
     mq.addEventListener("change", onChange);
     return () => mq.removeEventListener("change", onChange);
@@ -43,7 +49,6 @@ export function ThemeToggle({ className = "" }: { className?: string }) {
   function toggle() {
     const next = !document.documentElement.classList.contains("dark");
     applyTheme(next);
-    setDark(next);
     try {
       localStorage.setItem(STORAGE_KEY, next ? "dark" : "light");
     } catch {
@@ -57,7 +62,7 @@ export function ThemeToggle({ className = "" }: { className?: string }) {
       onClick={toggle}
       aria-label={dark ? "Switch to light theme" : "Switch to dark theme"}
       title={dark ? "Switch to light theme" : "Switch to dark theme"}
-      className={`inline-flex h-10 w-10 items-center justify-center rounded-md text-foreground transition-colors hover:bg-secondary ${className}`}
+      className={`inline-flex h-10 w-10 items-center justify-center rounded-md text-muted transition-colors hover:bg-highlight hover:text-ink ${className}`}
     >
       {/* The icon shows the destination, matching the label: a moon while
           light (click → dark), a sun while dark (click → light). */}

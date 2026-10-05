@@ -1,4 +1,4 @@
-@import 'tailwindcss';
+@import "tailwindcss";
 
 @custom-variant dark (&:is(.dark *));
 
@@ -6,7 +6,7 @@
   /* body copy + nav */
   --font-sans: var(--font-barlow), ui-sans-serif, system-ui, sans-serif;
   /* hand-drawn accents: headings, labels, buttons, tags */
-  --font-hand: var(--font-kalam), 'Comic Sans MS', cursive;
+  --font-hand: var(--font-kalam), "Comic Sans MS", cursive;
 
   --color-paper: var(--paper);
   --color-card: var(--card);
@@ -17,7 +17,7 @@
   --color-orange: var(--orange);
   --color-orange-hover: var(--orange-hover);
   --color-on-orange: var(--on-orange);
-  --color-peach: var(--peach);
+  --color-highlight: var(--highlight);
   --color-orange-text: var(--orange-text);
   --color-rule: var(--rule);
   --color-dot: var(--dot);
@@ -26,8 +26,8 @@
 :root {
   color-scheme: light;
   /* self-hosted via @fontsource, imported in Layout.astro */
-  --font-kalam: 'Kalam';
-  --font-barlow: 'Barlow';
+  --font-kalam: "Kalam";
+  --font-barlow: "Barlow";
 
   /* cream paper */
   --paper: #f9f3e6;
@@ -48,7 +48,7 @@
   /* ink that sits on --orange: buttons and the selected chip */
   --on-orange: #242a38;
   /* highlight, hover tint, dot ring */
-  --peach: #fbe2bd;
+  --highlight: #fbe2bd;
   /* kickers; readable on paper */
   --orange-text: #b8741c;
   /* dashed rules */
@@ -76,10 +76,9 @@
   --orange: #f7b051;
   --orange-hover: #f5a53a;
   --on-orange: #242a38;
-  /* a deep ember wash under chalk text. Mid-dark amber goes muddy brown, so
-     this sits much darker and leans redder, leaving the bright amber to the
-     buttons and kickers */
-  --peach: oklch(0.27 0.07 45);
+  /* a neutral dark grey under chalk text, so bright amber stays for buttons
+     and kickers */
+  --highlight: #373737;
   --orange-text: #f7b051;
   --rule: oklch(0.42 0.011 265);
   --dot: oklch(0.33 0.012 265);
@@ -108,6 +107,28 @@
 }
 
 @layer components {
+  /* First thing in <body>: off-screen until focused, then an amber sticker
+     top-left, above the sticky header */
+  .skip-link {
+    position: fixed;
+    top: 12px;
+    left: 12px;
+    z-index: 100;
+    transform: translateY(-200%);
+    font-family: var(--font-hand);
+    font-weight: 700;
+    font-size: 19px;
+    padding: 9px 20px 7px;
+    color: var(--on-orange);
+    background: var(--orange);
+    border: 2px solid var(--on-orange);
+    border-radius: 6px 14px 5px 12px / 12px 5px 14px 6px;
+    box-shadow: 4px 5px 0 var(--line);
+  }
+  .skip-link:focus-visible {
+    transform: none;
+  }
+
   /* Every section's inner wrapper */
   .container-page {
     max-width: 1280px;
@@ -124,7 +145,7 @@
     margin-bottom: 8px;
   }
   .kicker::before {
-    content: '// ';
+    content: "// ";
   }
 
   .h2 {
@@ -144,12 +165,12 @@
   }
 
   /* Hero "Talk to us." emphasis. Two treatments so the client can swap:
-     .hl-peach (chosen) or .hl-wavy. */
-  .hl-peach {
+     .hl-marker (chosen) or .hl-wavy. */
+  .hl-marker {
     background: linear-gradient(
       transparent 38%,
-      var(--peach) 38%,
-      var(--peach) 92%,
+      var(--highlight) 38%,
+      var(--highlight) 92%,
       transparent 92%
     );
     padding: 0 10px;
@@ -212,7 +233,7 @@
     border-color: var(--line);
   }
   .uneven-btn--secondary:hover {
-    background: var(--peach);
+    background: var(--highlight);
   }
   .uneven-btn--lift:hover {
     transform: rotate(var(--btn-rotate)) translate(-2px, -2px);

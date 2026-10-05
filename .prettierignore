@@ -1,0 +1,4 @@
+# Prettier already skips everything in .gitignore (dist, .astro, node_modules)
+package-lock.json
+# static files shipped as-is (logo SVGs, robots.txt, _headers)
+public/

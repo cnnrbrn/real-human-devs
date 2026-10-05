@@ -1,0 +1,400 @@
+---
+import ThemedImage from "../../components/themed-image.astro";
+import Layout from "../../layouts/Layout.astro";
+import { SiteNav } from "../../components/site-nav";
+import { SiteFooter } from "../../components/site-footer";
+import {
+  BrowserFrame,
+  PhoneFrame,
+  TabletFrame,
+} from "../../components/browser-frame";
+import { UnevenButton } from "../../components/uneven-button";
+import { caseStudyPath, facts, siteUrl } from "../../data/real-spanish-stories";
+
+import homeShot from "../../assets/case-studies/real-spanish-stories/home.png";
+import translateShot from "../../assets/case-studies/real-spanish-stories/story-translate.png";
+import newsShot from "../../assets/case-studies/real-spanish-stories/news.png";
+import lightStoryShot from "../../assets/case-studies/real-spanish-stories/story-light.png";
+import darkStoryShot from "../../assets/case-studies/real-spanish-stories/story-dark.png";
+import phoneStoryShot from "../../assets/case-studies/real-spanish-stories/phone-story.png";
+import phoneHomeShot from "../../assets/case-studies/real-spanish-stories/phone-home.png";
+import homeShotDark from "../../assets/case-studies/real-spanish-stories/home-dark.png";
+import tabletHomeShot from "../../assets/case-studies/real-spanish-stories/tablet-home.png";
+import tabletHomeShotDark from "../../assets/case-studies/real-spanish-stories/tablet-home-dark.png";
+import translateShotDark from "../../assets/case-studies/real-spanish-stories/story-translate-dark.png";
+import newsShotDark from "../../assets/case-studies/real-spanish-stories/news-dark.png";
+import phoneStoryShotDark from "../../assets/case-studies/real-spanish-stories/phone-story-dark.png";
+import phoneHomeShotDark from "../../assets/case-studies/real-spanish-stories/phone-home-dark.png";
+import levelsPanel from "../../assets/case-studies/real-spanish-stories/levels-panel.png";
+import levelsPanelDark from "../../assets/case-studies/real-spanish-stories/levels-panel-dark.png";
+import thumbCybersyn from "../../assets/case-studies/real-spanish-stories/social/youtube-thumbnail-cybersyn-absolute-beginner.png";
+import postCybersynBeginner from "../../assets/case-studies/real-spanish-stories/social/instagram-cybersyn-beginner.png";
+import postCybersynAbsolute from "../../assets/case-studies/real-spanish-stories/social/instagram-cybersyn-absolute-beginner.png";
+
+const features = [
+  {
+    title: "Select a word, see what it means.",
+    body: "Pick any word or phrase in the transcript and the English appears right above it. A note beside the text explains the grammar and what it means at that point in the story.",
+    image: translateShot,
+    dark: translateShotDark,
+    alt: "The Bay of Pigs transcript with “intentaron invadir Cuba” selected: the English, “They attempted to invade Cuba”, appears above it, and a side note explains that intentaron is the past tense of intentar",
+  },
+  {
+    title: "Something new every week.",
+    body: "Alongside the stories there’s a free weekly news episode for beginner and intermediate learners: real Latin American news, read slowly in clear Argentine Spanish, with the same translatable transcript.",
+    image: newsShot,
+    dark: newsShotDark,
+    alt: "The Easy Spanish News page, listing weekly episodes with their dates",
+  },
+  {
+    title: "Light or dark, screen or paper.",
+    body: "The site has light and dark themes. Every story can also be downloaded as a free PDF, with a light and a dark version.",
+    // deliberately inverted: each theme shows off the other one
+    image: darkStoryShot,
+    dark: lightStoryShot,
+    alt: "A story page with its cover, level picker and PDF download links",
+  },
+];
+
+const shotSizes = "(min-width: 1100px) 700px, calc(100vw - 64px)";
+
+// one story across YouTube and Instagram, so the shared look is plain to see
+const thumbnail = {
+  image: thumbCybersyn,
+  alt: "YouTube thumbnail in sand: Cybersyn, ¿Internet en 1971?, Español desde cero",
+};
+
+const posts = [
+  {
+    image: postCybersynAbsolute,
+    alt: "Instagram post in sand: Absolute Beginner, a story with 3 verbs, Cybersyn",
+  },
+  {
+    image: postCybersynBeginner,
+    alt: "Instagram post in red: Beginner Spanish, a story with 6 verbs, Cybersyn",
+  },
+];
+
+const stack = [
+  { label: "Frontend", value: "React, TanStack Start, Vite" },
+  { label: "API", value: "Node, NestJS" },
+  { label: "Database", value: "PostgreSQL" },
+  { label: "Jobs", value: "BullMQ, Python workers with MoviePy" },
+  { label: "Hosting", value: "AWS" },
+  { label: "CI/CD", value: "GitHub Actions runs the tests and deploys" },
+];
+---
+
+<Layout
+  title="Real Spanish Stories case study | Real Human Devs"
+  description="How we designed and built Real Spanish Stories: true stories from Latin American history, read aloud by real people, at four levels of Spanish."
+  image="/og/real-spanish-stories.png"
+  imageAlt="Real Spanish Stories case study: the Cerro Rico story page, with its video and four levels"
+  type="article"
+  jsonLd={{
+    "@type": "CreativeWork",
+    name: "Real Spanish Stories case study",
+    description:
+      "How we designed and built Real Spanish Stories: true stories from Latin American history, read aloud by real people, at four levels of Spanish.",
+    url: new URL(caseStudyPath, Astro.site).href,
+    image: new URL("/og/real-spanish-stories.png", Astro.site).href,
+    creator: { "@id": new URL("/#organization", Astro.site).href },
+    about: { "@type": "WebSite", name: "Real Spanish Stories", url: siteUrl },
+  }}
+>
+  <SiteNav client:load current="work" />
+  <main id="main">
+    <!-- intro -->
+    <section class="border-b-[1.5px] border-line bg-[radial-gradient(var(--dot)_1px,transparent_1.2px)] bg-size-[26px_26px]">
+      <div class="container-page pt-22 pb-26">
+        <div class="flex flex-wrap items-end justify-between gap-x-16 gap-y-10">
+          <div class="max-w-184">
+            <p class="kicker">Case study</p>
+            <h1 class="font-hand text-[clamp(52px,7.4vw,104px)] leading-[0.98] font-bold tracking-[-0.01em]">
+              Real Spanish Stories.
+            </h1>
+            <p class="mt-7 max-w-[36ch] text-[21px] leading-[1.55] text-pretty text-muted">
+              True stories from Latin American history, told in Spanish that
+              beginners can follow. Every story is narrated by a real person,
+              with no AI voices.
+            </p>
+          </div>
+
+          <dl class="w-full max-w-104">
+            {facts.map((fact) => (
+              <div class="grid grid-cols-[110px_1fr] gap-4 border-t-[1.5px] border-dashed border-rule py-3.5">
+                <dt class="font-hand text-[17px] text-muted">{fact.label}</dt>
+                <dd class="text-[17px]">{fact.value}</dd>
+              </div>
+            ))}
+            <div class="grid grid-cols-[110px_1fr] gap-4 border-y-[1.5px] border-dashed border-rule py-3.5">
+              <dt class="font-hand text-[17px] text-muted">Live at</dt>
+              <dd class="text-[17px]">
+                <a
+                  href={siteUrl}
+                  target="_blank"
+                  rel="noopener"
+                  class="underline underline-offset-4 hover:text-orange-text"
+                >
+                  realspanishstories.com<span aria-hidden="true"> ↗</span>
+                </a>
+              </dd>
+            </div>
+          </dl>
+        </div>
+
+        <!-- the homepage on desktop, tablet and phone, bottoms aligned; phones
+             only get the desktop one -->
+        <div class="mt-16 flex items-end justify-center gap-[2.5%]">
+          <BrowserFrame
+            url="realspanishstories.com"
+            className="w-full rotate-[-0.6deg] sm:w-[56%] rounded-[10px_14px_8px_12px] border-2 border-line shadow-[8px_9px_0_var(--line)]"
+          >
+            <ThemedImage
+              light={homeShot}
+              dark={homeShotDark}
+              alt="The Real Spanish Stories homepage on a desktop: a level filter above a grid of colourful story covers"
+              widths={[480, 800, 1200, 1600]}
+              sizes="(min-width: 1280px) 680px, (min-width: 640px) 56vw, calc(100vw - 64px)"
+              fetchpriority="high"
+              class="h-auto w-full"
+            />
+          </BrowserFrame>
+          <TabletFrame className="hidden w-[26%] rotate-[0.8deg] sm:block">
+            <ThemedImage
+              light={tabletHomeShot}
+              dark={tabletHomeShotDark}
+              alt="The same homepage on a tablet"
+              widths={[240, 400, 640]}
+              sizes="(min-width: 1280px) 316px, 26vw"
+              class="h-auto w-full"
+            />
+          </TabletFrame>
+          <PhoneFrame className="hidden w-[13%] -rotate-1 sm:block">
+            <ThemedImage
+              light={phoneHomeShot}
+              dark={phoneHomeShotDark}
+              alt="The same homepage on a phone"
+              widths={[160, 320]}
+              sizes="(min-width: 1280px) 158px, 13vw"
+              class="h-auto w-full"
+            />
+          </PhoneFrame>
+        </div>
+      </div>
+    </section>
+
+    <!-- the idea -->
+    <section class="border-b-[1.5px] border-line">
+      <div class="container-page grid grid-cols-[repeat(auto-fit,minmax(min(100%,420px),1fr))] items-start gap-16 py-26">
+        <div class="flex flex-col gap-6">
+          <div>
+            <p class="kicker">The idea</p>
+            <h2 class="h2">Stories worth listening to.</h2>
+          </div>
+          <p class="max-w-[42ch] text-[19px] leading-[1.6] text-muted">
+            Most beginner Spanish content is boring. Real Spanish Stories tells
+            true stories instead, such as the Bay of Pigs invasion, Maradona's
+            Hand of God goal and Cerro Rico, the Bolivian silver mountain known
+            as “the mountain that eats men”.
+          </p>
+          <p class="max-w-[42ch] text-[19px] leading-[1.6] text-muted">
+            Each story has four levels, from 3 verbs at Absolute Beginner up to
+            15 or more at Advanced. A complete beginner can follow the whole
+            story, then come back to a more difficult version as they improve.
+          </p>
+        </div>
+
+        <div class="flex justify-center">
+          <ThemedImage
+            light={levelsPanel}
+            dark={levelsPanelDark}
+            alt="The level picker on a story page: The Mountain That Eats Men in four versions, Absolute Beginner, Beginner, Intermediate and Advanced, each with its own colour-coded cover"
+            widths={[344, 688]}
+            sizes="344px"
+            class="h-auto w-full max-w-86 rotate-[0.8deg] rounded-xl border-[1.5px] border-line shadow-[6px_7px_0_var(--line)]"
+          />
+        </div>
+      </div>
+    </section>
+
+    <!-- what we built -->
+    <section class="border-b-[1.5px] border-line">
+      <div class="container-page py-26">
+        <div class="mb-20 flex flex-wrap items-end justify-between gap-8">
+          <div>
+            <p class="kicker">What we built</p>
+            <h2 class="h2">Made for listening.</h2>
+          </div>
+          <p class="max-w-[40ch] text-[19px] leading-[1.55] text-muted">
+            Every story has a captioned video, with the full transcript
+            underneath.
+          </p>
+        </div>
+
+        <div class="flex flex-col gap-24">
+          {features.map((feature, i) => (
+            <div
+              class:list={[
+                "flex flex-wrap items-center gap-x-16 gap-y-8",
+                i % 2 === 1 && "flex-row-reverse",
+              ]}
+            >
+              <div class="flex-[1_1_320px]">
+                <h3 class="font-hand text-[clamp(30px,3vw,40px)] leading-[1.1] font-bold text-balance">
+                  {feature.title}
+                </h3>
+                <p class="mt-4 max-w-[40ch] text-[19px] leading-[1.6] text-muted">
+                  {feature.body}
+                </p>
+              </div>
+              <div class="min-w-0 flex-[1.6_1_480px]">
+                <BrowserFrame
+                  url="realspanishstories.com"
+                  className={`rounded-lg border-[1.5px] border-line shadow-[6px_7px_0_var(--line)] ${i % 2 ? "rotate-[0.6deg]" : "rotate-[-0.6deg]"}`}
+                >
+                  <ThemedImage
+                    light={feature.image}
+                    dark={feature.dark}
+                    alt={feature.alt}
+                    widths={[640, 960, 1400]}
+                    sizes={shotSizes}
+                    class="h-auto w-full"
+                  />
+                </BrowserFrame>
+              </div>
+            </div>
+          ))}
+
+          <!-- phones: after the zig-zag, text on the left again -->
+          <div class="flex flex-wrap items-center gap-x-16 gap-y-10">
+            <div class="flex-[1_1_320px]">
+              <h3 class="font-hand text-[clamp(30px,3vw,40px)] leading-[1.1] font-bold text-balance">
+                Just as good on a phone.
+              </h3>
+              <p class="mt-4 max-w-[40ch] text-[19px] leading-[1.6] text-muted">
+                Every page works on a small screen. On a story page, the video
+                sits at the top, with the level buttons and the transcript
+                underneath.
+              </p>
+            </div>
+            <div class="flex flex-[1.6_1_480px] items-start justify-center gap-6 sm:gap-10">
+              <PhoneFrame className="w-[46%] max-w-62.5 -rotate-2">
+                <ThemedImage
+                  light={phoneHomeShot}
+                  dark={phoneHomeShotDark}
+                  alt="The homepage on a phone"
+                  widths={[320, 480, 750]}
+                  sizes="(min-width: 640px) 250px, 42vw"
+                  class="h-auto w-full"
+                />
+              </PhoneFrame>
+              <PhoneFrame className="mt-12 w-[46%] max-w-62.5 rotate-[1.5deg]">
+                <ThemedImage
+                  light={phoneStoryShot}
+                  dark={phoneStoryShotDark}
+                  alt="A story page on a phone, with its level buttons below the cover"
+                  widths={[320, 480, 750]}
+                  sizes="(min-width: 640px) 250px, 42vw"
+                  class="h-auto w-full"
+                />
+              </PhoneFrame>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- social design -->
+    <section class="border-b-[1.5px] border-line">
+      <div class="container-page py-26">
+        <div class="mb-16 flex flex-wrap items-end justify-between gap-8">
+          <div>
+            <p class="kicker">Beyond the site</p>
+            <h2 class="h2">Social media design.</h2>
+          </div>
+          <p class="max-w-[40ch] text-[19px] leading-[1.55] text-muted">
+            We also designed the channel's YouTube thumbnails and Instagram
+            posts. Each story uses the same illustration and level colour on the
+            site, YouTube and Instagram.
+          </p>
+        </div>
+
+        <ul class="grid grid-cols-2 items-center gap-x-6 gap-y-10 sm:gap-x-8 lg:grid-cols-[2.2fr_1fr_1fr]">
+          <li class="col-span-2 rotate-[-0.6deg] lg:col-span-1">
+            <ThemedImage
+              light={thumbnail.image}
+              alt={thumbnail.alt}
+              widths={[480, 640, 960, 1280]}
+              sizes="(min-width: 1024px) 604px, calc(100vw - 64px)"
+              class="h-auto w-full rounded-lg border-[1.5px] border-line shadow-[6px_7px_0_var(--line)]"
+            />
+          </li>
+          {posts.map((post, i) => (
+            <li style={`transform: rotate(${[1, -1.2][i]}deg)`}>
+              <ThemedImage
+                light={post.image}
+                alt={post.alt}
+                widths={[320, 480, 720]}
+                sizes="(min-width: 1024px) 276px, calc(50vw - 44px)"
+                class="h-auto w-full rounded-lg border-[1.5px] border-line shadow-[6px_7px_0_var(--line)]"
+              />
+            </li>
+          ))}
+        </ul>
+      </div>
+    </section>
+
+    <!-- tech -->
+    <section class="border-b-[1.5px] border-line">
+      <div class="container-page grid grid-cols-[repeat(auto-fit,minmax(min(100%,420px),1fr))] items-start gap-16 py-26">
+        <div class="flex flex-col gap-6">
+          <div>
+            <p class="kicker">How we built it</p>
+            <h2 class="h2">The stack.</h2>
+          </div>
+          <p class="max-w-[42ch] text-[19px] leading-[1.6] text-muted">
+            To publish a story, the Real Spanish Stories team adds its
+            transcript, and a Python worker using MoviePy turns it into a
+            captioned video, with no editing by hand.
+          </p>
+        </div>
+
+        <dl>
+          {stack.map((item, i) => (
+            <div
+              class:list={[
+                "grid grid-cols-[110px_1fr] gap-4 border-t-[1.5px] border-dashed border-rule py-3.5",
+                i === stack.length - 1 && "border-b-[1.5px]",
+              ]}
+            >
+              <dt class="font-hand text-[17px] text-muted">{item.label}</dt>
+              <dd class="text-[17px]">{item.value}</dd>
+            </div>
+          ))}
+        </dl>
+      </div>
+    </section>
+
+    <!-- next step -->
+    <section>
+      <div class="container-page flex flex-col items-start gap-6 py-26">
+        <p class="kicker">Your turn</p>
+        <h2 class="h2 max-w-[18ch]">Tell us about your project.</h2>
+        <p class="max-w-[44ch] text-[19px] leading-[1.6] text-muted">
+          We read every message and reply within one working day.
+        </p>
+        <UnevenButton
+          href="/#contact"
+          size="lg"
+          rotate={-0.8}
+          radius="5px 12px 6px 14px / 14px 6px 12px 5px"
+          className="mt-2"
+        >
+          Start a project <span aria-hidden="true">↗</span>
+        </UnevenButton>
+      </div>
+    </section>
+  </main>
+  <SiteFooter />
+</Layout>

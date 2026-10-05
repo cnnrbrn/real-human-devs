@@ -1,48 +1,55 @@
 ---
-import Layout from '../layouts/Layout.astro'
-import { Logo } from '../components/logo'
-import { UnevenButton } from '../components/uneven-button'
+import { getImage } from "astro:assets";
+import Layout from "../layouts/Layout.astro";
+import { SiteNav } from "../components/site-nav";
+import { Hero } from "../components/hero";
+import { Work } from "../components/work";
+import { Services } from "../components/services";
+import { ContactCta } from "../components/contact-cta";
+import { SiteFooter } from "../components/site-footer";
+import rssBayOfPigs from "../assets/rss-bay-of-pigs-light.png";
+import rssCerroRicoDark from "../assets/rss-cerro-rico-beginner-dark.png";
+import heroPhones from "../assets/hero-phones-light.png";
+import heroPhonesDark from "../assets/hero-phones-dark.png";
+
+// The sections are React components, which can't use <Image>, so optimise
+// here and hand them the result.
+async function optimise(
+  image: ImageMetadata,
+  widths = [640, 960, 1280, image.width],
+) {
+  const optimised = await getImage({ src: image, format: "webp", widths });
+  return {
+    src: optimised.src,
+    srcSet: optimised.srcSet.attribute,
+    width: image.width,
+    height: image.height,
+  };
+}
+
+// hero: both phones from the case study as one flat image (rendered from that
+// page, transparent background), in both themes
+const heroScreenshot = await optimise(heroPhones, [600, 900, 1200, 1800]);
+const heroScreenshotDark = await optimise(
+  heroPhonesDark,
+  [600, 900, 1200, 1800],
+);
+// featured project: a story page, cropped from the top into the 16:10 panel.
+// TODO: the dark one is still Cerro Rico until there's a dark Bay of Pigs
+const workScreenshot = await optimise(rssBayOfPigs);
+const workScreenshotDark = await optimise(rssCerroRicoDark);
 ---
 
-<!-- Placeholder for the live site until dev is merged into main -->
-<Layout title="Real Human Devs — Coming soon">
-  <div
-    class="flex min-h-dvh flex-col bg-[radial-gradient(var(--dot)_1px,transparent_1.2px)] bg-size-[26px_26px]"
-  >
-    <header class="container-page w-full py-7">
-      <Logo height="40px" />
-    </header>
+<Layout>
+  <!-- island: mobile menu toggle + scrollspy, above the fold -->
+  <SiteNav client:load />
+  <main id="main">
+    <Hero screenshot={heroScreenshot} darkScreenshot={heroScreenshotDark} />
+    <Work screenshot={workScreenshot} darkScreenshot={workScreenshotDark} />
+    <Services />
 
-    <main class="container-page flex w-full flex-1 flex-col items-start justify-center gap-7 py-16">
-      <p class="kicker">Coming soon</p>
-
-      <h1
-        class="font-hand text-[clamp(52px,7.4vw,92px)] leading-[0.98] font-bold tracking-[-0.01em] text-balance"
-      >
-        Tired of talking to AI? <span class="hl-peach">Talk to us.</span>
-      </h1>
-
-      <p class="max-w-[34ch] text-[21px] leading-[1.55] text-pretty text-muted">
-        A small team of senior designers and developers building web apps,
-        mobile apps and custom WordPress sites. Our new site is on its way — in
-        the meantime, say hello.
-      </p>
-
-      <UnevenButton
-        href="mailto:hello@realhumandevs.com"
-        size="lg"
-        rotate={-0.8}
-        radius="5px 12px 6px 14px / 14px 6px 12px 5px"
-        className="mt-2"
-      >
-        hello@realhumandevs.com
-      </UnevenButton>
-    </main>
-
-    <footer
-      class="container-page w-full border-t-[1.5px] border-dashed border-rule pt-5 pb-8 text-center font-hand text-[16px] text-muted"
-    >
-      © {new Date().getFullYear()} Real Human Devs
-    </footer>
-  </div>
+    <!-- island: form state, below the fold -->
+    <ContactCta client:visible />
+  </main>
+  <SiteFooter />
 </Layout>

@@ -1,6 +1,7 @@
 # build output
 dist/
 .astro/
+.wrangler/
 
 # dependencies
 node_modules/
@@ -12,3 +13,7 @@ node_modules/
 
 # macOS-specific files
 .DS_Store
+
+# local notes
+todo.md
+.claude

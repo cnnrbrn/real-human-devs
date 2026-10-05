@@ -1,0 +1,53 @@
+---
+// Astro twin of <ThemedScreenshot> in browser-frame.tsx: a screenshot with a
+// dark-theme version, swapped on the `dark` class so it follows the toggle.
+// Both are lazy because browsers skip lazy images that are display:none, so
+// each visitor downloads only the one for their theme. With
+// fetchpriority="high" (the LCP image) both are eager instead: lazy loading
+// delays LCP, and that costs more than downloading the hidden twin. Without
+// `dark`, it's one image shown in both themes.
+import { Image } from "astro:assets";
+import type { ImageMetadata } from "astro";
+
+interface Props {
+  light: ImageMetadata;
+  dark?: ImageMetadata;
+  alt: string;
+  widths: number[];
+  sizes: string;
+  class?: string;
+  fetchpriority?: "high" | "low" | "auto";
+}
+
+const {
+  light,
+  dark,
+  alt,
+  widths,
+  sizes,
+  class: className,
+  fetchpriority,
+} = Astro.props;
+const loading = fetchpriority === "high" ? "eager" : "lazy";
+---
+
+<Image
+  src={light}
+  {alt}
+  {widths}
+  {sizes}
+  {loading}
+  {fetchpriority}
+  class:list={[className, dark ? "dark:hidden" : "block"]}
+/>
+{dark && (
+  <Image
+    src={dark}
+    {alt}
+    {widths}
+    {sizes}
+    {loading}
+    {fetchpriority}
+    class:list={[className, "hidden dark:block"]}
+  />
+)}

@@ -1,85 +1,127 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Menu, X } from "lucide-react";
 import { Logo } from "./logo";
 import { ThemeToggle } from "./theme-toggle";
+import { UnevenButton } from "./uneven-button";
 
+// Rooted at "/" so they work from any page; on the homepage the browser
+// treats them as same-page jumps and just scrolls.
 const links = [
-  { label: "Home", href: "#top" },
-  { label: "Services", href: "#services" },
-  { label: "Work", href: "#work" },
-];
+  { label: "Home", id: "top" },
+  { label: "Work", id: "work" },
+  { label: "Services", id: "services" },
+  { label: "Contact", id: "contact" },
+].map((link) => ({ ...link, href: `/#${link.id}` }));
 
-export function SiteNav() {
+// the section in view gets an amber pen-stroke underline
+const activeLink =
+  "text-ink underline decoration-orange decoration-2 underline-offset-[6px]";
+
+/**
+ * `current` pins the active link on pages without the homepage's sections
+ * (e.g. "work" on a case study); without it, the link follows the scroll.
+ */
+export function SiteNav({ current }: { current?: string }) {
   const [open, setOpen] = useState(false);
-  const [active, setActive] = useState(links[0].href);
+  const [active, setActive] = useState(current ?? links[0].id);
+  const toggleRef = useRef<HTMLButtonElement>(null);
+
+  // Esc closes the open menu and hands focus back to its toggle
+  useEffect(() => {
+    if (!open) return;
+    const onKeyDown = (e: KeyboardEvent) => {
+      if (e.key !== "Escape") return;
+      setOpen(false);
+      toggleRef.current?.focus();
+    };
+    document.addEventListener("keydown", onKeyDown);
+    return () => document.removeEventListener("keydown", onKeyDown);
+  }, [open]);
 
   // mark whichever section is sitting just under the sticky header
   useEffect(() => {
+    if (current) return;
     const sections = links
-      .map((link) => document.getElementById(link.href.slice(1)))
+      .map((link) => document.getElementById(link.id))
       .filter((el): el is HTMLElement => el !== null);
 
-    const observer = new IntersectionObserver(
-      (entries) => {
-        const visible = entries.filter((entry) => entry.isIntersecting);
-        if (visible.length === 0) return;
+    // Active = the last section whose top has scrolled up past the header
+    // (anchor jumps land it at 90px — see scroll-padding-top in globals.css).
+    // Contact is too short to ever reach the header, so the page bottom
+    // counts as reaching it.
+    let frame = 0;
+    const update = () => {
+      frame = 0;
+      if (sections.length === 0) return;
+      let inView = sections[0];
+      for (const section of sections) {
+        if (section.getBoundingClientRect().top <= 120) inView = section;
+      }
+      const root = document.documentElement;
+      if (window.innerHeight + window.scrollY >= root.scrollHeight - 2) {
+        inView = sections[sections.length - 1];
+      }
+      setActive(inView.id);
+    };
+    const schedule = () => {
+      if (!frame) frame = requestAnimationFrame(update);
+    };
 
-        const topmost = visible.reduce((a, b) =>
-          a.boundingClientRect.top <= b.boundingClientRect.top ? a : b,
-        );
-        setActive(`#${topmost.target.id}`);
-      },
-      { rootMargin: "-88px 0px -55% 0px" },
-    );
-
-    sections.forEach((section) => observer.observe(section));
-    return () => observer.disconnect();
-  }, []);
+    update();
+    window.addEventListener("scroll", schedule, { passive: true });
+    window.addEventListener("resize", schedule);
+    return () => {
+      cancelAnimationFrame(frame);
+      window.removeEventListener("scroll", schedule);
+      window.removeEventListener("resize", schedule);
+    };
+  }, [current]);
 
   return (
-    <header className="sticky top-0 z-50 border-b-2 border-dashed border-foreground/40 bg-background/90 backdrop-blur-sm">
-      <div className="mx-auto flex h-20 max-w-6xl items-center justify-between px-5 md:px-8">
-        <a href="#top" className="flex items-center gap-2.5">
-          <Logo className="text-3xl leading-none" />
+    <header className="sticky top-0 z-50 border-b-[1.5px] border-dashed border-rule bg-paper">
+      <div className="container-page flex items-center justify-between gap-4 py-3.5 lg:gap-6">
+        {/* a touch smaller on phones so the logo, toggle and menu button
+            share one row down to 320px */}
+        <a
+          href="/"
+          className="flex shrink-0 [--logo-h:44px] sm:[--logo-h:58px]"
+        >
+          <Logo height="var(--logo-h)" />
         </a>
 
-        <nav className="hidden items-center gap-8 md:flex">
+        <nav className="hidden gap-8 text-[17px] lg:flex">
           {links.map((link) => (
             <a
               key={link.href}
               href={link.href}
-              aria-current={active === link.href ? "true" : undefined}
-              className={
-                active === link.href
-                  ? "text-lg text-foreground underline underline-offset-4"
-                  : "text-lg text-foreground/80 transition-colors hover:text-primary"
-              }
+              aria-current={active === link.id ? "true" : undefined}
+              className={`transition-colors hover:text-ink ${
+                active === link.id ? activeLink : "text-muted"
+              }`}
             >
               {link.label}
             </a>
           ))}
         </nav>
 
-        <div className="hidden items-center gap-2 md:flex">
+        <div className="hidden items-center gap-3 lg:flex">
           <ThemeToggle />
-          <a
-            href="#contact"
-            className="doodle-box-sm doodle-ink doodle-shadow inline-flex items-center gap-2 bg-primary px-5 py-2 font-hand text-lg font-bold text-primary-foreground doodle-lift"
-          >
+          <UnevenButton href="/#contact" size="sm" rotate={-1.2}>
             Start a project
-          </a>
+          </UnevenButton>
         </div>
 
-        <div className="flex items-center gap-1 md:hidden">
+        <div className="flex items-center gap-1 lg:hidden">
           <ThemeToggle />
           <button
+            ref={toggleRef}
             type="button"
             aria-label={open ? "Close menu" : "Open menu"}
             aria-expanded={open}
             onClick={() => setOpen((v) => !v)}
-            className="inline-flex items-center justify-center rounded-md p-2 text-foreground"
+            className="inline-flex items-center justify-center rounded-md p-2 text-ink"
           >
             {open ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
           </button>
@@ -87,30 +129,30 @@ export function SiteNav() {
       </div>
 
       {open && (
-        <div className="border-t-2 border-dashed border-foreground/40 bg-background md:hidden">
-          <nav className="mx-auto flex max-w-6xl flex-col gap-1 px-5 py-4">
+        <div className="border-t-[1.5px] border-dashed border-rule bg-paper lg:hidden">
+          <nav className="container-page flex flex-col gap-1 py-4">
             {links.map((link) => (
               <a
                 key={link.href}
                 href={link.href}
                 onClick={() => setOpen(false)}
-                aria-current={active === link.href ? "true" : undefined}
-                className={
-                  active === link.href
-                    ? "rounded-md px-2 py-2.5 text-lg text-foreground underline underline-offset-4"
-                    : "rounded-md px-2 py-2.5 text-lg text-foreground/80 transition-colors hover:bg-secondary hover:text-primary"
-                }
+                aria-current={active === link.id ? "true" : undefined}
+                className={`rounded-md px-2 py-2.5 text-[17px] transition-colors hover:bg-highlight hover:text-ink ${
+                  active === link.id ? activeLink : "text-muted"
+                }`}
               >
                 {link.label}
               </a>
             ))}
-            <a
-              href="#contact"
+            <UnevenButton
+              href="/#contact"
+              size="sm"
+              rotate={-1.2}
               onClick={() => setOpen(false)}
-              className="doodle-box-sm doodle-ink doodle-shadow doodle-lift mt-2 inline-flex items-center justify-center bg-primary px-4 py-2.5 font-hand text-lg font-bold text-primary-foreground"
+              className="mt-3 mb-1 justify-center"
             >
               Start a project
-            </a>
+            </UnevenButton>
           </nav>
         </div>
       )}
