@@ -16,6 +16,8 @@ The website for [realhumandevs.com](https://realhumandevs.com). It's built with
 | `npm run format:check` | Check formatting without changing anything |
 | `npm run lint`         | Lint with ESLint                           |
 | `npm run check`        | Type-check, including `.astro` files       |
+| `npm test`             | Run the tests once                         |
+| `npm run test:watch`   | Run the tests and re-run on changes        |
 
 ## Branches
 
