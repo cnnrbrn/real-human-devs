@@ -12,9 +12,9 @@ export type Screenshot = {
  * A screenshot with a dark-theme twin, swapped on the `dark` class (like
  * <Logo>) so it follows <ThemeToggle>. Both are lazy because browsers skip
  * lazy images that are display:none, so each visitor downloads only the one
- * for their theme. With fetchPriority="high" (the LCP image) both are eager
- * instead: lazy loading delays LCP, and that costs more than downloading the
- * hidden twin.
+ * for their theme. That holds for the LCP image too: with the CSS inlined,
+ * layout happens straight away, so lazy costs almost nothing, while eager
+ * downloaded both themes even where the image is hidden (the hero on phones).
  */
 export function ThemedScreenshot({
   light,
@@ -45,7 +45,7 @@ export function ThemedScreenshot({
           width={image.width}
           height={image.height}
           alt={alt}
-          loading={fetchPriority === "high" ? "eager" : "lazy"}
+          loading="lazy"
           fetchPriority={fetchPriority}
           className={`${className} ${theme}`}
         />
