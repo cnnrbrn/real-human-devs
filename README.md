@@ -5,6 +5,11 @@
 The website for [realhumandevs.com](https://realhumandevs.com). It's built with
 [Astro](https://astro.build), React and Tailwind CSS, and hosted on Cloudflare Pages.
 
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="docs/screenshot-dark.webp">
+  <img src="docs/screenshot-light.webp" alt="The Real Human Devs homepage: Tired of talking to AI? Talk to us, beside two phones showing Real Spanish Stories">
+</picture>
+
 ## Scripts
 
 | Command                | What it does                               |
