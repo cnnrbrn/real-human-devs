@@ -28,10 +28,11 @@ export function Logo({
         className="dark:hidden"
         style={{ height, width: "auto" }}
       />
+      {/* Both marks carry the alt text: whichever is display:none drops out of
+          the accessibility tree, so the name is read once, in either theme. */}
       <img
         src="/logo-dark.svg"
-        alt=""
-        aria-hidden="true"
+        alt="Real Human Devs"
         width={128}
         height={39}
         className="hidden dark:block"
