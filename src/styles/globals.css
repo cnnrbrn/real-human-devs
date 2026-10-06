@@ -50,7 +50,7 @@
   /* highlight, hover tint, dot ring */
   --highlight: #fbe2bd;
   /* kickers; readable on paper */
-  --orange-text: #b8741c;
+  --orange-text: #975b16;
   /* dashed rules */
   --rule: #b9b2a3;
   /* hero dot grid */
@@ -138,9 +138,9 @@
 
   .kicker {
     font-family: var(--font-hand);
-    /* 18px on phones (keeps the hero's "Just shipped" label on one line)
-       up to 24px on desktop, where 18px got lost under the 76px headings */
-    font-size: clamp(18px, 0.9vw + 12px, 24px);
+    /* 20px on phones up to 24px on desktop, where smaller got lost under
+       the 76px headings */
+    font-size: clamp(20px, 0.9vw + 14px, 24px);
     color: var(--orange-text);
     margin-bottom: 8px;
   }
