@@ -11,6 +11,9 @@ export default defineConfig({
   // Pages serves /work/foo/ and 308s /work/foo to it, so build and link the
   // slashed form and skip the redirect
   trailingSlash: "always",
+  // the CSS is small, so put it in the page instead of a render-blocking
+  // request (it was delaying the hero heading, the LCP element, on mobile)
+  build: { inlineStylesheets: "always" },
   integrations: [react(), sitemap()],
   vite: {
     plugins: [tailwindcss()],
